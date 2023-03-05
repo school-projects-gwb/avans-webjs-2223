@@ -1,0 +1,38 @@
+import { Terrain, LoadingHall, LoadingHallView, LoadingHallSwitcherView } from '../modules.js';
+
+export default class LoadingHallController {
+    /**
+     * @param { Terrain } terrain 
+     */
+    constructor(terrain) {
+        this.terrain = terrain;    
+        this.initiateLoadingHalls();
+        this.render();
+    }
+
+    render() {
+        this.LoadingHallView = new LoadingHallView('section-right');
+        this.LoadingHallSwitcherView = new LoadingHallSwitcherView(this.switchLoadingHall.bind(this), this.terrain.getLoadingHalls(), 'section-left');
+    }
+
+    initiateLoadingHalls() {
+        const hallAmount = 2;
+        const loadingHalls = [];
+
+        for (let i = 0; i < hallAmount; i++) {
+            const identifier = i + 1;
+            loadingHalls.push(new LoadingHall(`Loading hall ${identifier}`, identifier));
+        }
+
+        loadingHalls[0].setIsActive(true);
+
+        this.terrain.setLoadingHalls(loadingHalls);
+    }
+
+    switchLoadingHall(id) {
+        const selectedHall = this.terrain.getLoadingHalls().find(item => item.getId() == id);
+        if (selectedHall.getIsActive()) return;
+        this.terrain.setActiveLoadingHall(id);
+        this.LoadingHallSwitcherView.render();
+    }
+}

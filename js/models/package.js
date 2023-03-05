@@ -1,5 +1,4 @@
-class Package {
-    
+export default class Package {
     constructor() {
         this.shape = this.generateRandomShape();
         this.width = this.calculateWidth();
