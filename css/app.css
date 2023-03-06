@@ -33,6 +33,12 @@ main {
     grid-auto-flow: row;
 }
 
+.test {
+    grid-column: span 2/13;
+    grid-row: span 1/7;
+    background: blue;
+}
+
 .bg-primary {
     background-color: var(--bg-primary);
 }

@@ -22,7 +22,7 @@ export default class LoadingHallController {
         clearInterval(this.renderInterval);
         this.renderInterval = setInterval(() => {
             this.conveyorBeltController.render();
-        }, 2000);
+        }, 1000);
     }
 
     initiateLoadingHalls() {

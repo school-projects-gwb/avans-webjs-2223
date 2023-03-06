@@ -8,6 +8,15 @@ export default class TruckController {
         this.terrain = terrain;
         this.targetElementId = targetElementId;
         this.render();
+
+        const truck = new Truck(
+            4, 
+            1,
+            5, 
+            "DEFAULT"
+            );
+
+        this.terrain.getActiveLoadingHall().addTruck(truck);
     }
 
     render() {

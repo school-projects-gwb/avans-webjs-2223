@@ -22,10 +22,14 @@ export default class LoadingHall {
     getId = () => this.id;
     
     addTruck(truck) {
-        console.log(truck);
+        const avgTrucksPerBelt = this.calculateAverageTrucksPerBelt();
+        const beltsWithFewestTrucks = this.conveyorBelts.filter(belt => belt.truckCount === avgTrucksPerBelt - 1 || belt.truckCount === avgTrucksPerBelt);
+        const beltChoice = beltsWithFewestTrucks[Math.floor(Math.random() * beltsWithFewestTrucks.length)];
+        beltChoice.addTruck(truck);
     }
 
-    getTrucks() {
-
+    calculateAverageTrucksPerBelt() {
+        const truckCount = this.conveyorBelts.reduce((total, conveyorBelt) => total + conveyorBelt.truckCount, 0);
+        return Math.ceil(truckCount / this.conveyorBelts.length);
     }
 }

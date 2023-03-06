@@ -26,8 +26,8 @@ export default class ConveyorBeltController {
     }
 
     initiateConveyorBelts() {
-        const conveyorBeltAmount = 2;
-        const startPosY = 4, incrementPosY = 4, startPosX = 1, endPosX = 13;
+        const conveyorBeltAmount = 1;
+        const startPosY = 4, incrementPosY = 4, startPosX = 1, endPosX = 12;
         let currentPosY = startPosY;
         
         const conveyorBelts = [];
