@@ -5,4 +5,12 @@ export default class Truck {
         this.arrivalInterval = arrivalInterval;
         this.type = type;
     }
+
+    setX(xPos) {
+        this.xPos = xPos;
+    }
+
+    setY(yPos) {
+        this.yPos = yPos;
+    }
 }

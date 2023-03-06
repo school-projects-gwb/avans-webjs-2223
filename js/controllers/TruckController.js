@@ -1,5 +1,10 @@
+import { Terrain } from '../modules.js';
+
 export default class TruckController {
-    constructor() {
-        
+    /**
+     * @param { Terrain } terrain 
+     */
+    constructor(terrain) {
+        this.terrain = terrain;
     }
 }

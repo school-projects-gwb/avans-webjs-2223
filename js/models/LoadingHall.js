@@ -9,22 +9,21 @@ export default class LoadingHall {
         this.id = id;
     }
 
-    /**
-     * @param {boolean} isActive 
-     */
-    setIsActive(isActive) {
-        this.isActive = isActive;
+    setIsActive = (isActive) => this.isActive = isActive;    
+    getIsActive = () => this.isActive;
+
+    setConveyorBelts = (conveyorBelts) => this.conveyorBelts = conveyorBelts; 
+    getConveyorBelts = () => this.conveyorBelts;
+
+    getName = () => this.name;
+
+    getId = () => this.id;
+    
+    addTruck(truck) {
+
     }
 
-    getName() {
-        return this.name;
-    }
+    getTrucks() {
 
-    getIsActive() {
-        return this.isActive;
-    }
-
-    getId() {
-        return this.id;
     }
 }

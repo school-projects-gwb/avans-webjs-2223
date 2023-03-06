@@ -9,10 +9,13 @@ import TruckController from "./controllers/TruckController.js";
 // Models
 import LoadingHall from "./models/LoadingHall.js";
 import Terrain from "./models/Terrain.js";
+import ConveyorBelt from "./models/ConveyorBelt.js";
+import ConveyorBeltDock from "./models/ConveyorBeltDock.js";
 
 // Views
 import LoadingHallView from "./views/LoadingHallView.js";
 import LoadingHallSwitcherView from "./views/LoadingHallSwitcherView.js";
+import ConveyorBeltView from "./views/ConveyorBeltView.js";
 
 // View components
 import ButtonLink from "./views/components/ButtonLink.js";
@@ -27,10 +30,13 @@ export {
     // Models
     LoadingHall,
     Terrain,
+    ConveyorBelt,
+    ConveyorBeltDock,
 
     // Views
     LoadingHallView,
     LoadingHallSwitcherView,
+    ConveyorBeltView,
 
     // View components
     ButtonLink

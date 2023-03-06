@@ -1,18 +1,25 @@
-import { Terrain, LoadingHall, LoadingHallView, LoadingHallSwitcherView } from '../modules.js';
+import { Terrain, LoadingHall, LoadingHallView, LoadingHallSwitcherView, ConveyorBeltController } from '../modules.js';
 
 export default class LoadingHallController {
     /**
      * @param { Terrain } terrain 
      */
     constructor(terrain) {
-        this.terrain = terrain;    
+        this.terrain = terrain;
         this.initiateLoadingHalls();
+        this.conveyorBeltController = new ConveyorBeltController(terrain, 'section-right');
         this.render();
     }
 
     render() {
         this.LoadingHallView = new LoadingHallView('section-right');
         this.LoadingHallSwitcherView = new LoadingHallSwitcherView(this.switchLoadingHall.bind(this), this.terrain.getLoadingHalls(), 'section-left');
+        this.conveyorBeltController.setConveyorBelts();
+
+        clearInterval(this.renderInterval);
+        this.renderInterval = setInterval(() => {
+            this.conveyorBeltController.render();
+        }, 2000);
     }
 
     initiateLoadingHalls() {
@@ -24,8 +31,6 @@ export default class LoadingHallController {
             loadingHalls.push(new LoadingHall(`Loading hall ${identifier}`, identifier));
         }
 
-        loadingHalls[0].setIsActive(true);
-
         this.terrain.setLoadingHalls(loadingHalls);
     }
 
@@ -33,6 +38,6 @@ export default class LoadingHallController {
         const selectedHall = this.terrain.getLoadingHalls().find(item => item.getId() == id);
         if (selectedHall.getIsActive()) return;
         this.terrain.setActiveLoadingHall(id);
-        this.LoadingHallSwitcherView.render();
+        this.render();
     }
 }
