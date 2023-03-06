@@ -37,6 +37,8 @@ export default class ConveyorBeltController {
             currentPosY += incrementPosY;
         }
 
-        this.terrain.setConveyorBelts(conveyorBelts);
+        for (const loadingHall of this.terrain.getLoadingHalls()) {
+            loadingHall.setConveyorBelts(conveyorBelts);    
+        }
     }
 }

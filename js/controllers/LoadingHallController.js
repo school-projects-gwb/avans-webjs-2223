@@ -1,4 +1,4 @@
-import { Terrain, LoadingHall, LoadingHallView, LoadingHallSwitcherView, ConveyorBeltController } from '../modules.js';
+import { Terrain, LoadingHall, LoadingHallView, LoadingHallSwitcherView, ConveyorBeltController, TruckController } from '../modules.js';
 
 export default class LoadingHallController {
     /**
@@ -7,13 +7,16 @@ export default class LoadingHallController {
     constructor(terrain) {
         this.terrain = terrain;
         this.initiateLoadingHalls();
+
         this.conveyorBeltController = new ConveyorBeltController(terrain, 'section-right');
         this.render();
+        
+        this.truckController = new TruckController(terrain, 'section-left');
     }
 
     render() {
-        this.LoadingHallView = new LoadingHallView('section-right');
-        this.LoadingHallSwitcherView = new LoadingHallSwitcherView(this.switchLoadingHall.bind(this), this.terrain.getLoadingHalls(), 'section-left');
+        this.loadingHallView = new LoadingHallView('section-right');
+        this.loadingHallSwitcherView = new LoadingHallSwitcherView(this.switchLoadingHall.bind(this), this.terrain.getLoadingHalls(), 'section-left');
         this.conveyorBeltController.setConveyorBelts();
 
         clearInterval(this.renderInterval);

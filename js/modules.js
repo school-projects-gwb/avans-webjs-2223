@@ -11,14 +11,22 @@ import LoadingHall from "./models/LoadingHall.js";
 import Terrain from "./models/Terrain.js";
 import ConveyorBelt from "./models/ConveyorBelt.js";
 import ConveyorBeltDock from "./models/ConveyorBeltDock.js";
+import TruckForm from "./models/TruckForm.js";
+import TruckType from "./models/TruckType.js";
 
 // Views
 import LoadingHallView from "./views/LoadingHallView.js";
 import LoadingHallSwitcherView from "./views/LoadingHallSwitcherView.js";
 import ConveyorBeltView from "./views/ConveyorBeltView.js";
+import TruckCreatorView from "./views/TruckCreatorView.js";
+import TruckOverviewView from "./views/TruckOverviewView.js";
+import DOM from "./views/DOM.js";
 
 // View components
 import ButtonLink from "./views/components/ButtonLink.js";
+import BlockTitle from "./views/components/BlockTitle.js";
+import TextInput from "./views/components/TextInput.js";
+import SelectInput from "./views/components/SelectInput.js";
 
 export {
     // Controllers
@@ -32,12 +40,20 @@ export {
     Terrain,
     ConveyorBelt,
     ConveyorBeltDock,
+    TruckForm,
+    TruckType,
 
     // Views
     LoadingHallView,
     LoadingHallSwitcherView,
     ConveyorBeltView,
+    TruckCreatorView,
+    TruckOverviewView,
+    DOM,
 
     // View components
-    ButtonLink
+    ButtonLink,
+    BlockTitle,
+    TextInput,
+    SelectInput
 }

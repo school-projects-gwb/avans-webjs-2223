@@ -6,11 +6,11 @@ export default class Truck {
         this.type = type;
     }
 
-    setX(xPos) {
+    setPosX(posX) {
         this.xPos = xPos;
     }
 
-    setY(yPos) {
+    setPosY(posY) {
         this.yPos = yPos;
     }
 }
