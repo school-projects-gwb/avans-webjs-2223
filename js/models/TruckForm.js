@@ -12,6 +12,8 @@ export default class TruckForm {
         this.formResult = {};
     }
 
+    getProperty = (propertyName) => this.formResult[propertyName];
+
     validate() {
         const keys1 = Object.keys(this.formResult);
         const keys2 = Object.keys(this.fields);

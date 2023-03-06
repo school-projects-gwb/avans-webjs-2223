@@ -29,17 +29,13 @@ export default class TruckCreatorView {
 
     renderStep(step) {
         const existsCheck = document.getElementById(this.formWrapperElementId)
-        if (existsCheck) {
-            existsCheck.remove();
-        }
+        if (existsCheck) existsCheck.remove();
 
         const formWrapper = document.createElement('div');
         formWrapper.id = this.formWrapperElementId;
         formWrapper.style.display = 'grid';
         formWrapper.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
-        // formWrapper.style.grid
         formWrapper.style.alignItems = 'center';
-        // formWrapper.style.alignItems = 'center';
 
         switch (step) {
             case 1:
@@ -89,7 +85,12 @@ export default class TruckCreatorView {
         }
 
         if (Object.keys(validationResult) == 0) {
-            step == 3 ? this.callbackFunction(this.truckForm) :this.renderStep(++step);
+            if (step == 3) {
+                this.callbackFunction(this.truckForm);
+                this.renderStep(1);
+            } else {
+                this.renderStep(++step);
+            }
         } else {
             this.renderErrors(validationResult);
         }

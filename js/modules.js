@@ -11,6 +11,7 @@ import LoadingHall from "./models/LoadingHall.js";
 import Terrain from "./models/Terrain.js";
 import ConveyorBelt from "./models/ConveyorBelt.js";
 import ConveyorBeltDock from "./models/ConveyorBeltDock.js";
+import Truck from "./models/Truck.js";
 import TruckForm from "./models/TruckForm.js";
 import TruckType from "./models/TruckType.js";
 
@@ -42,6 +43,7 @@ export {
     ConveyorBeltDock,
     TruckForm,
     TruckType,
+    Truck,
 
     // Views
     LoadingHallView,

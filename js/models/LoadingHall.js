@@ -1,3 +1,5 @@
+import { Truck } from "../modules.js";
+
 export default class LoadingHall {
     /**
      * 
@@ -20,7 +22,7 @@ export default class LoadingHall {
     getId = () => this.id;
     
     addTruck(truck) {
-
+        console.log(truck);
     }
 
     getTrucks() {

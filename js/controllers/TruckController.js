@@ -1,4 +1,4 @@
-import { Terrain, TruckCreatorView, TruckForm } from '../modules.js';
+import { Terrain, Truck, TruckCreatorView, TruckForm } from '../modules.js';
 
 export default class TruckController {
     /**
@@ -15,6 +15,15 @@ export default class TruckController {
     }
 
     createTruck(truckForm) {
-        console.log(truckForm);
+        if (!truckForm.validate) return;
+        
+        const truck = new Truck(
+            truckForm.getProperty('width'), 
+            truckForm.getProperty('height'), 
+            truckForm.getProperty('interval'), 
+            truckForm.getProperty('type')
+            );
+
+        this.terrain.getActiveLoadingHall().addTruck(truck);
     }
 }
