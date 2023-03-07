@@ -5,8 +5,8 @@ export default class TruckController {
      * @param { Terrain } terrain 
      */
     constructor(terrain, targetElementId) {
-        this.terrain = terrain;
-        this.targetElementId = targetElementId;
+        this._terrain = terrain;
+        this._targetElementId = targetElementId;
         this.render();
 
         const truck = new Truck(
@@ -16,11 +16,11 @@ export default class TruckController {
             "DEFAULT"
             );
 
-        this.terrain.getActiveLoadingHall().addTruck(truck);
+        this._terrain.activeLoadingHall.addTruck(truck);
     }
 
     render() {
-        this.truckCreatorView = new TruckCreatorView(this.createTruck.bind(this), this.targetElementId, new TruckForm);
+        this.truckCreatorView = new TruckCreatorView(this.createTruck.bind(this), this._targetElementId, new TruckForm);
     }
 
     createTruck(truckForm) {
@@ -33,6 +33,6 @@ export default class TruckController {
             truckForm.getProperty('type')
             );
 
-        this.terrain.getActiveLoadingHall().addTruck(truck);
+        this._terrain.activeLoadingHall.addTruck(truck);
     }
 }

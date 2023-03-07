@@ -14,12 +14,14 @@ import ConveyorBeltDock from "./models/ConveyorBeltDock.js";
 import Truck from "./models/Truck.js";
 import TruckForm from "./models/TruckForm.js";
 import TruckType from "./models/TruckType.js";
+import TruckState from "./models/TruckState.js";
 import TruckObject from "./models/TruckObject.js";
 
 // Views
 import LoadingHallView from "./views/LoadingHallView.js";
 import LoadingHallSwitcherView from "./views/LoadingHallSwitcherView.js";
 import ConveyorBeltView from "./views/ConveyorBeltView.js";
+import TruckView from "./views/TruckView.js";
 import TruckCreatorView from "./views/TruckCreatorView.js";
 import TruckOverviewView from "./views/TruckOverviewView.js";
 import DOM from "./views/DOM.js";
@@ -44,6 +46,7 @@ export {
     ConveyorBeltDock,
     TruckForm,
     TruckType,
+    TruckState,
     Truck,
     TruckObject,
 
@@ -51,6 +54,7 @@ export {
     LoadingHallView,
     LoadingHallSwitcherView,
     ConveyorBeltView,
+    TruckView,
     TruckCreatorView,
     TruckOverviewView,
     DOM,

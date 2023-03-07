@@ -33,11 +33,18 @@ main {
     grid-auto-flow: row;
 }
 
-.test {
-    grid-column: span 2/13;
-    grid-row: span 1/7;
-    background: blue;
+.transition {
+    transition: grid-column 1s;
 }
+
+@keyframes slide-in {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
 
 .bg-primary {
     background-color: var(--bg-primary);

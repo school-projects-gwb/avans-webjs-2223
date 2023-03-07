@@ -1,3 +1,5 @@
+import { TruckState } from "../modules.js";
+
 export default class TruckObject {
     constructor(posX, posY, width, height) {
         this._width = width;
@@ -5,6 +7,15 @@ export default class TruckObject {
         this._posY = posY;
         this._posX = posX;
         this._isDocked = false;
+        this._state = TruckState.ENTERING;
+    }
+
+    get state() {
+        return this._state;
+    }
+
+    set state(newState) {
+        this._state = newState;
     }
 
     set posX(newPosX) { 

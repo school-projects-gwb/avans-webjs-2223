@@ -1,28 +1,43 @@
-import { ConveyorBelt, ConveyorBeltView } from '../modules.js';
+import {ConveyorBelt, ConveyorBeltView, TruckState, TruckView} from '../modules.js';
 
 export default class ConveyorBeltController {
     /**
      * @param { Terrain } terrain 
      */
     constructor(terrain, targetElementId) {
-        this.terrain = terrain;
-        this.trucks = terrain.trucks;
-        this.targetElementId = targetElementId;
+        this._terrain = terrain;
+        this._trucks = terrain.trucks;
+        this._targetElementId = targetElementId;
+        this._truckView = new TruckView(targetElementId);
         this.initiateConveyorBelts();
         this.setConveyorBelts();
     }
 
     setConveyorBelts() { 
-        this.conveyorBelts = this.terrain.getConveyorBelts();
-        this.conveyorBeltView = new ConveyorBeltView(this.targetElementId, this.conveyorBelts);
+        this._conveyorBelts = this._terrain.conveyorBelts;
+        this._conveyorBeltView = new ConveyorBeltView(this._targetElementId, this._conveyorBelts);
     };
 
     render() {
-        for (const conveyorBelt of this.conveyorBelts) {
-            conveyorBelt.handlePackageLoading();
-        }
+        this._conveyorBeltView.render();
 
-        this.conveyorBeltView.render();
+        for (const conveyorBelt of this._conveyorBelts) {
+            conveyorBelt.handlePackageLoading();
+            const trucks = conveyorBelt.trucks;
+            
+            for (const truckWrapper of trucks) {
+                for (const truck of truckWrapper.getTrucks()) {
+                    if (truck.state === TruckState.ENTERING) {
+                        this._truckView.render(truck);
+                        truck.state = TruckState.DOCKED;
+                    } 
+                }
+            }
+        }
+    }
+
+    get trucks() {
+        return this._trucks;
     }
 
     initiateConveyorBelts() {
@@ -37,8 +52,8 @@ export default class ConveyorBeltController {
             currentPosY += incrementPosY;
         }
 
-        for (const loadingHall of this.terrain.getLoadingHalls()) {
-            loadingHall.setConveyorBelts(conveyorBelts);    
+        for (const loadingHall of this._terrain.getLoadingHalls()) {
+            loadingHall.setConveyorBelts(conveyorBelts);
         }
     }
 }

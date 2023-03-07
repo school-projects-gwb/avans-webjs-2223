@@ -1,8 +1,8 @@
 export default class Package {
     constructor() {
-        this.shape = this.generateRandomShape();
-        this.width = this.calculateWidth();
-        this.height = this.calculateHeight();
+        this._shape = this.generateRandomShape();
+        this._width = this.calculateWidth();
+        this._height = this.calculateHeight();
     }
 
     generateRandomShape() {
@@ -23,7 +23,7 @@ export default class Package {
 
     calculateWidth() {
         let maxRowWidth = 0;
-        this.shape.forEach(row => {
+        this._shape.forEach(row => {
             const rowWidth = row.length;
             if (rowWidth > maxRowWidth) {
                 maxRowWidth = rowWidth;
@@ -34,6 +34,6 @@ export default class Package {
     }
 
     calculateHeight() {
-        return this.shape.length;
+        return this._shape.length;
     }
 }

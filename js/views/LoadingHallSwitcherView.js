@@ -25,7 +25,7 @@ export default class LoadingHallSwitcherView {
         loadingHallWrapper.style.justifyContent = 'space-between';
 
         for (const loadingHall of this.loadingHalls) {
-            const hallElement = new ButtonLink(loadingHall.getIsActive(), loadingHall.getName(), loadingHall.getId(), this.callbackFunction);
+            const hallElement = new ButtonLink(loadingHall.getIsActive(), loadingHall.name, loadingHall.id, this.callbackFunction);
             hallElement.style.margin = '.25rem';
             hallElement.style.width = '50%';
             loadingHallWrapper.appendChild(hallElement);

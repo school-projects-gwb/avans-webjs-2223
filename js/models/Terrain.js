@@ -5,37 +5,29 @@ export default class Terrain {
      * @param { LoadingHall[] } loadingHalls 
      */
     setLoadingHalls(loadingHalls) {
-        this.loadingHalls = loadingHalls;
+        this._loadingHalls = loadingHalls;
         this.setActiveLoadingHall(loadingHalls[0].id);
     }
 
     getLoadingHalls() {
-        return this.loadingHalls;
+        return this._loadingHalls;
     }
 
-    setConveyorBelts(conveyorBelts) {
-        this.activeLoadingHall.setConveyorBelts(conveyorBelts);
+    get conveyorBelts() {
+        return this._activeLoadingHall.getConveyorBelts();
     }
 
-    getConveyorBelts() {
-        return this.activeLoadingHall.getConveyorBelts();
-    }
-
-    getActiveLoadingHall() {
-        return this.loadingHalls.find(hall => hall.getIsActive() == true);
-    }
-
-    getActiveTrucks() {
-        return this.getActiveLoadingHall().trucks();
+    get activeLoadingHall() {
+        return this._loadingHalls.find(hall => hall.getIsActive() == true);
     }
 
     setActiveLoadingHall(id) {
-        const currentActive = this.loadingHalls.find(hall => hall.getIsActive() == true);
+        const currentActive = this._loadingHalls.find(hall => hall.getIsActive() == true);
         currentActive?.setIsActive(false);
 
-        const newActive = this.loadingHalls.find(hall => hall.getId() == id);
+        const newActive = this._loadingHalls.find(hall => hall.id == id);
         newActive.setIsActive(true);  
 
-        this.activeLoadingHall = newActive;
+        this._activeLoadingHall = newActive;
     }
 }

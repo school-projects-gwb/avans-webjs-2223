@@ -1,7 +1,9 @@
 export default class ConveyorBeltDock {
     constructor(posX) {
-        this.posX = posX;
+        this._posX = posX;
     }
     
-    getPosX = () => this.posX;
+    get posX() {
+        return this._posX;
+    }
 }

@@ -7,29 +7,33 @@ export default class LoadingHall {
      * @param {any} id 
      */
     constructor(name, id) {
-        this.name = name;
-        this.id = id;
+        this._name = name;
+        this._id = id;
     }
 
-    setIsActive = (isActive) => this.isActive = isActive;    
-    getIsActive = () => this.isActive;
+    setIsActive = (isActive) => this._isActive = isActive;
+    getIsActive = () => this._isActive;
 
-    setConveyorBelts = (conveyorBelts) => this.conveyorBelts = conveyorBelts; 
-    getConveyorBelts = () => this.conveyorBelts;
+    setConveyorBelts = (conveyorBelts) => this._conveyorBelts = conveyorBelts;
+    getConveyorBelts = () => this._conveyorBelts;
 
-    getName = () => this.name;
+    get name() {
+        return this._name;
+    }
 
-    getId = () => this.id;
+    get id() {
+        return this._id;
+    }
     
     addTruck(truck) {
         const avgTrucksPerBelt = this.calculateAverageTrucksPerBelt();
-        const beltsWithFewestTrucks = this.conveyorBelts.filter(belt => belt.truckCount === avgTrucksPerBelt - 1 || belt.truckCount === avgTrucksPerBelt);
+        const beltsWithFewestTrucks = this._conveyorBelts.filter(belt => belt.truckCount === avgTrucksPerBelt - 1 || belt.truckCount === avgTrucksPerBelt);
         const beltChoice = beltsWithFewestTrucks[Math.floor(Math.random() * beltsWithFewestTrucks.length)];
         beltChoice.addTruck(truck);
     }
 
     calculateAverageTrucksPerBelt() {
-        const truckCount = this.conveyorBelts.reduce((total, conveyorBelt) => total + conveyorBelt.truckCount, 0);
-        return Math.ceil(truckCount / this.conveyorBelts.length);
+        const truckCount = this._conveyorBelts.reduce((total, conveyorBelt) => total + conveyorBelt.truckCount, 0);
+        return Math.ceil(truckCount / this._conveyorBelts.length);
     }
 }
