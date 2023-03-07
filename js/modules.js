@@ -16,6 +16,7 @@ import TruckForm from "./models/TruckForm.js";
 import TruckType from "./models/TruckType.js";
 import TruckState from "./models/TruckState.js";
 import TruckObject from "./models/TruckObject.js";
+import Package from "./models/Package.js";
 
 // Views
 import LoadingHallView from "./views/LoadingHallView.js";
@@ -24,6 +25,7 @@ import ConveyorBeltView from "./views/ConveyorBeltView.js";
 import TruckView from "./views/TruckView.js";
 import TruckCreatorView from "./views/TruckCreatorView.js";
 import TruckOverviewView from "./views/TruckOverviewView.js";
+import PackageView from "./views/PackageView.js";
 import DOM from "./views/DOM.js";
 
 // View components
@@ -49,6 +51,7 @@ export {
     TruckState,
     Truck,
     TruckObject,
+    Package,
 
     // Views
     LoadingHallView,
@@ -57,6 +60,7 @@ export {
     TruckView,
     TruckCreatorView,
     TruckOverviewView,
+    PackageView,
     DOM,
 
     // View components

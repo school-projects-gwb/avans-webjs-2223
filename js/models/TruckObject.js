@@ -8,6 +8,21 @@ export default class TruckObject {
         this._posX = posX;
         this._isDocked = false;
         this._state = TruckState.ENTERING;
+        //testing purposes
+        this._maxPackages = 2;
+        this._packageCount = 0;
+    }
+
+    get packageCount() {
+        return this._packageCount;
+    }
+
+    isLoaded() {
+        return this._packageCount == this._maxPackages;
+    }
+
+    addPackage(pack) {
+        this._packageCount++;
     }
 
     get state() {

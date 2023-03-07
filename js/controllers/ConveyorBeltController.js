@@ -1,14 +1,16 @@
-import {ConveyorBelt, ConveyorBeltView, TruckState, TruckView} from '../modules.js';
+import {ConveyorBelt, ConveyorBeltView, TruckState, TruckView, PackageView } from '../modules.js';
 
 export default class ConveyorBeltController {
     /**
-     * @param { Terrain } terrain 
+     * @param { Terrain } terrain
+     * @param targetElementId
      */
     constructor(terrain, targetElementId) {
         this._terrain = terrain;
         this._trucks = terrain.trucks;
         this._targetElementId = targetElementId;
         this._truckView = new TruckView(targetElementId);
+        this._packageView = new PackageView(targetElementId);
         this.initiateConveyorBelts();
         this.setConveyorBelts();
     }
@@ -16,22 +18,27 @@ export default class ConveyorBeltController {
     setConveyorBelts() { 
         this._conveyorBelts = this._terrain.conveyorBelts;
         this._conveyorBeltView = new ConveyorBeltView(this._targetElementId, this._conveyorBelts);
+        this._conveyorBeltView.render();
     };
 
     render() {
-        this._conveyorBeltView.render();
-
+        document.getElementById(this._targetElementId).innerHTML = '';
         for (const conveyorBelt of this._conveyorBelts) {
             conveyorBelt.handlePackageLoading();
             const trucks = conveyorBelt.trucks;
+            const packages = conveyorBelt.packages;
             
             for (const truckWrapper of trucks) {
-                for (const truck of truckWrapper.getTrucks()) {
-                    if (truck.state === TruckState.ENTERING) {
-                        this._truckView.render(truck);
-                        truck.state = TruckState.DOCKED;
-                    } 
+                for (const truck of truckWrapper.trucks) {
+                    this._truckView.render(truck);
+                    if (truck.state === TruckState.ENTERING) truck.state = TruckState.DOCKED;
+                    if (truck.state === TruckState.LOADED) truck.state = TruckState.LEAVING;
                 }
+            }
+
+            for (const pack of packages) {
+                this._packageView.render(pack);
+                if (pack.state === TruckState.ENTERING) pack.state = TruckState.DOCKED;
             }
         }
     }
@@ -52,7 +59,7 @@ export default class ConveyorBeltController {
             currentPosY += incrementPosY;
         }
 
-        for (const loadingHall of this._terrain.getLoadingHalls()) {
+        for (const loadingHall of this._terrain.loadingHalls) {
             loadingHall.setConveyorBelts(conveyorBelts);
         }
     }

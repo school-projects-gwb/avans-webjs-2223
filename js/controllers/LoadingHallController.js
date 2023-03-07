@@ -16,10 +16,11 @@ export default class LoadingHallController {
 
     render() {
         this._loadingHallView = new LoadingHallView('section-right');
-        this._loadingHallSwitcherView = new LoadingHallSwitcherView(this.switchLoadingHall.bind(this), this._terrain.getLoadingHalls(), 'section-left');
+        this._loadingHallSwitcherView = new LoadingHallSwitcherView(this.switchLoadingHall.bind(this), this._terrain.loadingHalls, 'section-left');
         this._conveyorBeltController.setConveyorBelts();
 
         clearInterval(this._renderInterval);
+
         this._renderInterval = setInterval(() => {
             this._conveyorBeltController.render();
         }, 300);
@@ -34,13 +35,13 @@ export default class LoadingHallController {
             loadingHalls.push(new LoadingHall(`Loading hall ${identifier}`, identifier));
         }
 
-        this._terrain.setLoadingHalls(loadingHalls);
+        this._terrain.loadingHalls = loadingHalls;
     }
 
     switchLoadingHall(id) {
-        const selectedHall = this._terrain.getLoadingHalls().find(item => item.id == id);
+        const selectedHall = this._terrain.loadingHalls.find(item => item.id == id);
         if (selectedHall.getIsActive()) return;
-        this._terrain.setActiveLoadingHall(id);
+        this._terrain.activeLoadingHall = id;
         this.render();
     }
 }

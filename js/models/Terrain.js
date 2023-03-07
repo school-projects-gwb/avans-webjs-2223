@@ -1,15 +1,12 @@
 import { LoadingHall } from "../modules.js";
 
 export default class Terrain {
-    /**
-     * @param { LoadingHall[] } loadingHalls 
-     */
-    setLoadingHalls(loadingHalls) {
+    set loadingHalls(loadingHalls) {
         this._loadingHalls = loadingHalls;
-        this.setActiveLoadingHall(loadingHalls[0].id);
+        this.activeLoadingHall = loadingHalls[0].id;
     }
 
-    getLoadingHalls() {
+    get loadingHalls() {
         return this._loadingHalls;
     }
 
@@ -21,12 +18,12 @@ export default class Terrain {
         return this._loadingHalls.find(hall => hall.getIsActive() == true);
     }
 
-    setActiveLoadingHall(id) {
+    set activeLoadingHall(id) {
         const currentActive = this._loadingHalls.find(hall => hall.getIsActive() == true);
         currentActive?.setIsActive(false);
 
         const newActive = this._loadingHalls.find(hall => hall.id == id);
-        newActive.setIsActive(true);  
+        newActive.setIsActive(true);
 
         this._activeLoadingHall = newActive;
     }

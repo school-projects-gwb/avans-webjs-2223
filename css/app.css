@@ -46,6 +46,11 @@ main {
     }
   }
 
+.slide-out-right {
+    visibility: hidden;
+    transform: translateX(50px);
+}
+
 .bg-primary {
     background-color: var(--bg-primary);
 }

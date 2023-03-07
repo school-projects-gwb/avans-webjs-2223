@@ -1,8 +1,38 @@
+import {TruckState} from "../modules.js";
+
 export default class Package {
-    constructor() {
-        this._shape = this.generateRandomShape();
-        this._width = this.calculateWidth();
-        this._height = this.calculateHeight();
+    constructor(id, posX, posY) {
+        // this._shape = this.generateRandomShape();
+        // this._width = this.calculateWidth();
+        // this._height = this.calculateHeight();
+        this._id = id;
+        this._posX = posX;
+        this._posY = posY;
+        this._state = TruckState.ENTERING;
+    }
+
+    get state() {
+        return this._state;
+    }
+
+    set state(newState) {
+        this._state = newState;
+    }
+
+    get posY() {
+        return this._posY;
+    }
+
+    get posX() {
+        return this._posX;
+    }
+
+    set posX(newPosX) {
+        this._posX = newPosX;
+    }
+
+    get id() {
+        return this._id;
     }
 
     generateRandomShape() {
