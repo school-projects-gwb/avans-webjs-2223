@@ -54,32 +54,23 @@ export default class ConveyorBelt {
     }
 
     handlePackageLoading() {
-        // Truck generation and movement
+        // Truck generation
+        for (const truckWrapper of this._trucks) {
+            const availableDock = this.getFirstAvailableDock(1);
+            if (!availableDock) break;
+            if (truckWrapper.canCreate) truckWrapper.create(availableDock.posX);
+        }
+
+        // Truck logic
         for (const truckWrapper of this._trucks) {
             for (const [index, truck] of truckWrapper.trucks.entries()) {
-                const availableDock = this.getFirstAvailableDock(truck.posX);
-
-                if (truck.state === TruckState.LEAVING) {
-                    truckWrapper._trucks.splice(index, 1);
-                    continue;
-                }
-
-                if (!availableDock && !truck.isDocked) {
-                    for (const truckWrapper of this._trucks) {
-                        truckWrapper.stopGeneration();
-                    }
-
-                    continue;
-                }
-                
-                if (availableDock && !truck.isDocked) {
-                    truck.isDocked = true;
-                    truck.posX = availableDock.posX;
-                }
+                if (truck.isLoaded() && truck.state === TruckState.DOCKED) truck.state = TruckState.LOADED;
+                if (truck.state === TruckState.LEAVING) truckWrapper._trucks.splice(index, 1);
             }
         }
 
         // Package generation and movement
+        // Strategy: Make sure entire grid row is filled with packages at all times
         for (const [index, pack] of this._packages.entries()) {
             const truckAtPosition = this._trucks.find(truck => {
                 return truck.trucks.some(truckObject => {
@@ -92,13 +83,11 @@ export default class ConveyorBelt {
                     return truckObject.posX === pack.posX;
                 });
 
-                if (!truckObject.isLoaded(pack)) {
+                if (!truckObject.isLoaded() && truckObject.state === TruckState.DOCKED) {
                     truckObject.addPackage(pack);
                     this._packages.splice(index, 1);
                     this.fillEmptySpot(index);
                 }
-
-                if (truckObject.isLoaded(pack))truckObject.state = TruckState.LOADED;
             }
         }
     }

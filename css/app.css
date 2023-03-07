@@ -22,6 +22,7 @@ main {
     width: 25%;
     height: 100%;
     padding: 1rem;
+    z-index: 2;
 }
 
 #section-right {
@@ -34,7 +35,7 @@ main {
 }
 
 .transition {
-    transition: grid-column 1s;
+    transition: grid-column .5s;
 }
 
 @keyframes slide-in {

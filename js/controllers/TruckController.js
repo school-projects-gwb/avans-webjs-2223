@@ -19,7 +19,7 @@ export default class TruckController {
         const truck2 = new Truck(
             2,
             1,
-            2,
+            3,
             "DEFAULT"
         );
 

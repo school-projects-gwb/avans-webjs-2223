@@ -6,7 +6,6 @@ export default class TruckObject {
         this._height = height;
         this._posY = posY;
         this._posX = posX;
-        this._isDocked = false;
         this._state = TruckState.ENTERING;
         //testing purposes
         this._maxPackages = 2;
