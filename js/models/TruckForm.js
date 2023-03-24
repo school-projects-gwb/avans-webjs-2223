@@ -3,8 +3,8 @@ import { TruckType } from "../modules.js";
 export default class TruckForm {
     constructor() {
         this._fields = {
-            'width': {'validationType': 'minmax', 'min': 1, 'max': 4, 'label': 'Lengte'},
-            'height': {'validationType': 'minmax', 'min': 1, 'max': 3, 'label': 'Breedte'},
+            'width': {'validationType': 'minmax', 'min': 2, 'max': 6, 'label': 'Lengte'},
+            'height': {'validationType': 'minmax', 'min': 2, 'max': 3, 'label': 'Breedte'},
             'type': {'validationType': 'values', 'values': Object.keys(TruckType), 'label': 'Type'},
             'interval': {'validationType': 'minmax', 'min': 1, 'max': 10, 'label': 'Interval'}
         };

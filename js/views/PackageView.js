@@ -7,9 +7,9 @@ export default class PackageView {
 
     render(pack) {
         const packageElement = document.createElement('div');
-        packageElement.style.background = 'lightgreen';
-        packageElement.classList.add('transition', 'rounded-xl');
+        packageElement.classList.add('transition', 'package', pack._shapeName);
         packageElement.style.gridRow = `span ${1} / ${pack.posY}`;
+
         if (pack.state === TruckState.ENTERING) {
             packageElement.style.gridColumn = `span ${1} / ${pack.posX + 1}`;
             packageElement.style.animation = 'slide-in .5s';

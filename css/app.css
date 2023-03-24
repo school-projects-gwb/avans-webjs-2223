@@ -118,3 +118,37 @@ main {
     font-size: 0.9rem;
     margin-top: .1rem;
 }
+
+.package {
+    background-repeat: no-repeat;
+    background-image: url('/img/o-shape.png');
+    background-size: contain;
+}
+
+.package.o {
+    background-image: url('/img/o-shape.png');
+}
+
+.package.i {
+    background-image: url('/img/i-shape.png');
+}
+
+.package.l {
+    background-image: url('/img/l-shape.png');
+}
+
+.package.j {
+    background-image: url('/img/j-shape.png');
+}
+
+.package.s {
+    background-image: url('/img/s-shape.png');
+}
+
+.package.z {
+    background-image: url('/img/z-shape.png');
+}
+
+.package.t {
+    background-image: url('/img/t-shape.png');
+}

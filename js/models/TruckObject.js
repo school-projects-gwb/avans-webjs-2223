@@ -10,6 +10,17 @@ export default class TruckObject {
         //testing purposes
         this._maxPackages = 2;
         this._packageCount = 0;
+        this._noFit = 0;
+        this._noFitLimit = 3;
+
+        this._grid = [];
+        for (let i = 0; i < height; i++) {
+            let row = [];
+            for (let j = 0; j < width; j++) {
+                row.push(0);
+            }
+            this._grid.push(row);
+        }
     }
 
     get packageCount() {
@@ -17,11 +28,87 @@ export default class TruckObject {
     }
 
     isLoaded() {
-        return this._packageCount == this._maxPackages;
+        return this._noFit === this._noFitLimit;
     }
 
-    addPackage(pack) {
-        this._packageCount++;
+    packageFits(packObject) {
+        const packWidth = packObject.width;
+        const packHeight = packObject.height;
+        const pack = packObject.shape;
+
+        // Check all 4 possible rotations
+        for (let r = 0; r < 4; r++) {
+            let rotatedPack = pack;
+            let rotatedWidth = packWidth;
+            let rotatedHeight = packHeight;
+
+            // Rotate the package shape 90 degrees
+            if (r > 0) {
+                rotatedPack = [];
+                for (let i = 0; i < packWidth; i++) {
+                    rotatedPack[i] = [];
+                    for (let j = 0; j < packHeight; j++) {
+                        rotatedPack[i][j] = pack[packHeight - j - 1][i];
+                    }
+                }
+                rotatedWidth = packHeight;
+                rotatedHeight = packWidth;
+            }
+
+            // Check if the rotated package fits in the truck
+            for (let i = 0; i <= this.height - rotatedHeight; i++) {
+                for (let j = 0; j <= this.width - rotatedWidth; j++) {
+                    let canFit = true;
+                    for (let k = 0; k < rotatedHeight; k++) {
+                        for (let l = 0; l < rotatedWidth; l++) {
+                            if (
+                                (j + l >= this.width || i + k >= this.height) ||
+                                (this._grid[i + k][j + l] !== 0 && rotatedPack[k][l] !== 0)
+                            ) {
+                                canFit = false;
+                                break;
+                            }
+                        }
+                        if (!canFit) {
+                            break;
+                        }
+                    }
+                    if (canFit) {
+                        return { width: rotatedWidth, height: rotatedHeight, shape: rotatedPack, x: j, y: i };
+                    }
+                }
+            }
+        }
+
+        // No rotation fits
+        this._noFit++;
+        return false;
+    }
+
+    addPackage(packObject) {
+        if (!packObject) {
+            return;
+        }
+        const packWidth = packObject.width;
+        const packHeight = packObject.height;
+        const pack = packObject.shape;
+        const startX = packObject.x;
+        const startY = packObject.y;
+        const endX = startX + packWidth;
+        const endY = startY + packHeight;
+
+        // Check that the package shape fits within the bounds of the grid
+        if (startX < 0 || endX > this.width || startY < 0 || endY > this.height) {
+            return;
+        }
+
+        for (let k = 0; k < packHeight; k++) {
+            for (let l = 0; l < packWidth; l++) {
+                if (pack[k][l] !== 0) {
+                    this._grid[startY + k][startX + l] = pack[k][l];
+                }
+            }
+        }
     }
 
     get state() {
@@ -30,6 +117,10 @@ export default class TruckObject {
 
     set state(newState) {
         this._state = newState;
+    }
+
+    get grid() {
+        return this._grid;
     }
 
     set posX(newPosX) { 

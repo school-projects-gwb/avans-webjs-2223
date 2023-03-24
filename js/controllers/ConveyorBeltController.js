@@ -50,16 +50,15 @@ export default class ConveyorBeltController {
     initiateConveyorBelts() {
         const conveyorBeltAmount = 1;
         const startPosY = 4, incrementPosY = 4, startPosX = 1, endPosX = 12;
-        let currentPosY = startPosY;
-        
-        const conveyorBelts = [];
-
-        for (let i = 0; i < conveyorBeltAmount; i++) {
-            conveyorBelts.push(new ConveyorBelt(currentPosY, startPosX, endPosX));
-            currentPosY += incrementPosY;
-        }
 
         for (const loadingHall of this._terrain.loadingHalls) {
+            let currentPosY = startPosY;
+            const conveyorBelts = [];
+
+            for (let i = 0; i < conveyorBeltAmount; i++) {
+                conveyorBelts.push(new ConveyorBelt(currentPosY, startPosX, endPosX));
+                currentPosY += incrementPosY;
+            }
             loadingHall.setConveyorBelts(conveyorBelts);
         }
     }

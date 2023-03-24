@@ -10,15 +10,15 @@ export default class TruckController {
         this.render();
 
         const truck = new Truck(
-            3,
             2,
+            3,
             2,
             "DEFAULT"
             );
 
         const truck2 = new Truck(
-            2,
-            1,
+            6,
+            3,
             3,
             "DEFAULT"
         );

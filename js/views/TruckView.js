@@ -8,9 +8,30 @@ export default class TruckView {
     render(truck) {
         const truckElement = document.createElement('div');
         truckElement.style.background = 'lightblue';
+        truckElement.style.border = "3px solid black";
         truckElement.classList.add('transition');
         truckElement.style.gridRow = `span ${truck.height} / ${truck.posY}`;
-        truckElement.innerHTML = truck.packageCount;
+
+        truckElement.style.display = "grid";
+        truckElement.style.gridTemplateColumns = `repeat(${truck.width}, 1fr)`
+        truckElement.style.gridTemplateRows = `repeat(${truck.height}, 1fr)`;
+
+        // Add the grid cells to the truck element
+        for (let y = 0; y < truck.height; y++) {
+            for (let x = 0; x < truck.width; x++) {
+                const cell = document.createElement("div");
+                if (truck.grid[y][x] !== 0) {
+                    cell.style.backgroundColor = 'orange';
+                }
+                cell.style.border = "1px solid black";
+                truckElement.appendChild(cell);
+            }
+        }
+        for (let i = 0; i < truck.width * truck.height; i++) {
+            const cell = document.createElement("div");
+            cell.style.border = "1px solid black";
+            truckElement.appendChild(cell);
+        }
 
         if (truck.state === TruckState.ENTERING) {
             truckElement.style.gridColumn = `span 1 / 1`;

@@ -19,9 +19,9 @@ export default class ConveyorBelt {
     }
 
     setDocks() {
-        const dockAmount = 3;
-        let currentDockCol = 4;
-        const dockColDistanceBetween = 4;
+        const dockAmount = 2;
+        let currentDockCol = 6;
+        const dockColDistanceBetween = 6;
         const docks = [];
 
         for (let i = 0; i < dockAmount; i++) {
@@ -84,9 +84,12 @@ export default class ConveyorBelt {
                 });
 
                 if (!truckObject.isLoaded() && truckObject.state === TruckState.DOCKED) {
-                    truckObject.addPackage(pack);
-                    this._packages.splice(index, 1);
-                    this.fillEmptySpot(index);
+                    const packageFits = truckObject.packageFits(pack);
+                    truckObject.addPackage(packageFits);
+
+                    const indexToDelete = index;
+                    this._packages.splice(indexToDelete, 1);
+                    this.fillEmptySpot(indexToDelete);
                 }
             }
         }

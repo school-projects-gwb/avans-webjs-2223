@@ -2,7 +2,7 @@ import {TruckState} from "../modules.js";
 
 export default class Package {
     constructor(id, posX, posY) {
-        this._shape = this.generateRandomShape();
+        this.generateRandomShape();
         this._width = this.calculateWidth();
         this._height = this.calculateHeight();
         this._id = id;
@@ -35,8 +35,25 @@ export default class Package {
         return this._id;
     }
 
+    get width() {
+        return this._width;
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    get shape() {
+        return this._shape;
+    }
+
+    get shapeName() {
+        return this._shapeName;
+    }
+
     generateRandomShape() {
         // All possible Tetromino shapes
+        const shapeNames = ['o', 'i', 'l', 'j', 's', 'z', 't'];
         const shapes = [
             [[1, 1], [1, 1]], // O-shape
             [[1], [1], [1], [1]], // I-shape
@@ -48,7 +65,8 @@ export default class Package {
         ];
 
         const index = Math.floor(Math.random() * shapes.length);
-        return shapes[index];
+        this._shape = shapes[index];
+        this._shapeName = shapeNames[index];
     }
 
     calculateWidth() {
