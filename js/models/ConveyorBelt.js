@@ -1,7 +1,7 @@
 import {ConveyorBeltDock, Package, TruckState} from "../modules.js";
 
 export default class ConveyorBelt {
-    constructor(posY, startPosX, endPosX) {
+    constructor(posY, startPosX, endPosX, eventEmitter) {
         this._posY = posY;
         this._trucks = [];
         this._startPosX = startPosX;
@@ -13,6 +13,17 @@ export default class ConveyorBelt {
         }
         this._endPosX = endPosX;
         this.setDocks();
+        this._eventEmitter = eventEmitter;
+
+        this._eventEmitter.on("dragAndDrop", (data) => {
+            if (data.enabled) {
+                for (const truckWrapper of this._trucks) {
+                    for (const [index, truck] of truckWrapper.trucks.entries()) {
+                        truck.unloadPackage();
+                    }
+                }
+            }
+        });
     }
 
     get packages() {

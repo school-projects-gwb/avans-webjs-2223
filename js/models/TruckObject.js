@@ -1,8 +1,9 @@
-import { TruckState } from "../modules.js";
+import {EventEmitter, Package, TruckState, PackageShape} from "../modules.js";
 
 export default class TruckObject {
-    constructor(posX, posY, width, height) {
+    constructor(id, posX, posY, width, height) {
         this._width = width;
+        this._id = `truck-${id}`;
         this._height = height;
         this._posY = posY;
         this._posX = posX;
@@ -18,6 +19,87 @@ export default class TruckObject {
             }
             this._grid.push(row);
         }
+
+        EventEmitter.on("packageDragEnter", (data) => {
+            this.handleDragEnter(data);
+        });
+
+        EventEmitter.on("packageDragLeave", (data) => {
+            this.handleDragLeave(data);
+        });
+
+        EventEmitter.on("packageDragDrop", (data) => {
+            this.handleDragDrop(data);
+        });
+
+        this._dragCounter = 0;
+        this._dragShape = null;
+    }
+
+    handleDragEnter(data) {
+        if (this._dragCounter === 1) {
+            return;
+        }
+
+        this._dragCounter = 1;
+
+        if (this._id !== data.target.id) {
+            return;
+        }
+
+        const shapeName = data.sourceClassList[data.sourceClassList.length-1];
+        const packageShape = Object.values(PackageShape).find(pkg => pkg.info.name === shapeName);
+        const packageCheck = new Package(0, 0, 0, packageShape);
+        const packageFits = this.packageFits(packageCheck);
+
+        data.target.classList.remove('regular');
+
+        if (!packageFits) {// Do not persist noFit count
+            this._noFit--;
+            data.target.classList.remove('success');
+            data.target.classList.add('error');
+        } else {
+            this._dragPackage = packageFits;
+            data.target.classList.add('success');
+            data.target.classList.remove('error');
+        }
+
+    }
+
+    handleDragLeave(data) {
+        if (this._dragCounter === 0) {
+            return;
+        }
+
+        this._dragCounter = 0;
+        this.dragStop(data.target);
+    }
+
+    handleDragDrop(data) {
+        if (this._dragPackage != null) {
+            this.addPackage(this._dragPackage);
+            this.loadPackage();
+            EventEmitter.emit('packageDragPlaced', {});
+
+            for (let y = 0; y < this._height; y++) {
+                for (let x = 0; x < this._width; x++) {
+                    if (this._grid[y][x]['number'] !== 0 && this._grid[y][x]['number'] !== 2) {
+                        const childDiv = document.querySelector(`#${data.target.id} > div:nth-child(${y * this._width + x + 1})`);
+                        childDiv.style.backgroundColor = this._grid[y][x]['color'];
+                    }
+                }
+            }
+        }
+
+        this._dragCounter = 0;
+        this.dragStop(data.target);
+    }
+
+    dragStop(targetEl) {
+        targetEl.classList.remove('success');
+        targetEl.classList.remove('error');
+        targetEl.classList.add('regular');
+        this._dragPackage = null;
     }
 
     isLoaded() {
@@ -89,6 +171,16 @@ export default class TruckObject {
         }
     }
 
+    unloadPackage() {
+        for (let y = 0; y < this._height; y++) {
+            for (let x = 0; x < this._width; x++) {
+                if (this._grid[y][x]['number'] === 2) {
+                    this._grid[y][x]['number'] = 0;
+                }
+            }
+        }
+    }
+
     addPackage(packObject) {
         if (!packObject) {
             return;
@@ -139,6 +231,10 @@ export default class TruckObject {
         return this._posY;
     }
 
+    get id() {
+        return this._id;
+    }
+
     set posY(newPosY) {
         this._posY = newPosY;
     }
@@ -149,9 +245,5 @@ export default class TruckObject {
 
     get height() {
         return this._height;
-    }
-
-    set isDocked(newIsDocked) {
-        this._isDocked = newIsDocked;
     }
 }

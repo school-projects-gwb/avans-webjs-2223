@@ -9,27 +9,9 @@ export default class TruckController {
         this._targetElementId = targetElementId;
         this.render();
 
-        const truck = new Truck(
-            2,
-            3,
-            2,
-            "DEFAULT"
-            );
-
-        const truck2 = new Truck(
-            6,
-            3,
-            3,
-            "DEFAULT"
-        );
-
-        const truck3 = new Truck(
-            3,
-            3,
-            5,
-            "DEFAULT"
-        );
-
+        const truck = new Truck(2, 3, 2, "DEFAULT");
+        const truck2 = new Truck(6, 3, 3, "DEFAULT");
+        const truck3 = new Truck(3, 3, 5, "DEFAULT");
         this._terrain.activeLoadingHall.addTruck(truck);
         this._terrain.activeLoadingHall.addTruck(truck2);
         this._terrain.activeLoadingHall.addTruck(truck3);

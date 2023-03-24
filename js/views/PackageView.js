@@ -10,6 +10,7 @@ export default class PackageView {
         packageElement.classList.add('transition', 'package', pack.shapeInfo['name']);
         packageElement.style.gridRow = `span ${1} / ${pack.posY}`;
         packageElement.style.margin = '.5rem';
+        packageElement.draggable = true;
 
         if (pack.state === TruckState.ENTERING) {
             packageElement.style.gridColumn = `span ${1} / ${pack.posX + 1}`;

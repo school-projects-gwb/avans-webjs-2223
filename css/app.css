@@ -152,3 +152,15 @@ main {
 .package.t {
     background-image: url('/img/t-shape.png');
 }
+
+.truck.error {
+    background-color: lightcoral;
+}
+
+.truck.success {
+    background-color: lightgreen;
+}
+
+.truck.regular {
+    background-color: lightblue;
+}

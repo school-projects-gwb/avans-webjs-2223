@@ -4,8 +4,10 @@ export default class ConveyorBeltController {
     /**
      * @param { Terrain } terrain
      * @param targetElementId
+     * @param { EventEmitter } eventEmitter
      */
-    constructor(terrain, targetElementId) {
+    constructor(terrain, targetElementId, eventEmitter) {
+        this._eventEmitter = eventEmitter;
         this._terrain = terrain;
         this._trucks = terrain.trucks;
         this._targetElementId = targetElementId;
@@ -57,7 +59,7 @@ export default class ConveyorBeltController {
             const conveyorBelts = [];
 
             for (let i = 0; i < conveyorBeltAmount; i++) {
-                conveyorBelts.push(new ConveyorBelt(currentPosY, startPosX, endPosX));
+                conveyorBelts.push(new ConveyorBelt(currentPosY, startPosX, endPosX, this._eventEmitter));
                 currentPosY += incrementPosY;
             }
             loadingHall.setConveyorBelts(conveyorBelts);

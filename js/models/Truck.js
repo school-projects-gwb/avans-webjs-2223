@@ -17,7 +17,7 @@ export default class Truck {
 
     create(posX) {
         this._lastGenerated = Date.now();
-        const newTruck = new TruckObject(posX, this._posY, this._width, this._height);
+        const newTruck = new TruckObject(Math.floor(Math.random() * 10000), posX, this._posY, this._width, this._height);
         newTruck.isDocked = true;
         this._trucks.push(newTruck);
     }

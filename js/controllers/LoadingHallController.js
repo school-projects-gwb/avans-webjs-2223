@@ -1,4 +1,11 @@
-import { Terrain, LoadingHall, LoadingHallView, LoadingHallSwitcherView, ConveyorBeltController, TruckController } from '../modules.js';
+import {
+    LoadingHall,
+    LoadingHallView,
+    LoadingHallSwitcherView,
+    ConveyorBeltController,
+    TruckController,
+    DragAndDropController, EventEmitter
+} from '../modules.js';
 
 export default class LoadingHallController {
     /**
@@ -6,12 +13,22 @@ export default class LoadingHallController {
      */
     constructor(terrain) {
         this._terrain = terrain;
+        this._eventEmitter = EventEmitter;
         this.initiateLoadingHalls();
 
-        this._conveyorBeltController = new ConveyorBeltController(terrain, 'section-right');
+        this._conveyorBeltController = new ConveyorBeltController(terrain, 'section-right', this._eventEmitter);
         this.render();
         
         this._truckController = new TruckController(terrain, 'section-left');
+        this._dragAndDropController = new DragAndDropController(this._eventEmitter, 'section-left');
+
+        this._eventEmitter.on("dragAndDrop", (data) => {
+            if (data.enabled) {
+                clearInterval(this._renderInterval);
+            } else {
+                this.render();
+            }
+        });
     }
 
     render() {
@@ -32,7 +49,7 @@ export default class LoadingHallController {
 
         for (let i = 0; i < hallAmount; i++) {
             const identifier = i + 1;
-            loadingHalls.push(new LoadingHall(`Loading hall ${identifier}`, identifier));
+            loadingHalls.push(new LoadingHall(`Laadhal ${identifier}`, identifier));
         }
 
         this._terrain.loadingHalls = loadingHalls;

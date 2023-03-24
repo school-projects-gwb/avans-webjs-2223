@@ -1,8 +1,8 @@
-import {TruckState} from "../modules.js";
+import {PackageShape, TruckState} from "../modules.js";
 
 export default class Package {
-    constructor(id, posX, posY) {
-        this.generateRandomShape();
+    constructor(id, posX, posY, packageShape = null) {
+        packageShape == null ? this.generateRandomShape() : this.setShapeInfo(packageShape);
         this._width = this.calculateWidth();
         this._height = this.calculateHeight();
         this._id = id;
@@ -52,31 +52,16 @@ export default class Package {
     }
 
     generateRandomShape() {
-        // All possible Tetromino shapes
-        const shapeInfo = [
-            {name: 'o', color: 'pink'},
-            {name: 'i', color: 'yellow'},
-            {name: 'l', color: 'orange'},
-            {name: 'j', color: 'red'},
-            {name: 's', color: 'blue'},
-            {name: 'z', color: 'purple'},
-            {name: 't', color: 'green'}
-        ];
+        const packageShapeValues = Object.values(PackageShape);
+        const index = Math.floor(Math.random() * packageShapeValues.length);
 
-        const shapes = [
-            [[1, 1], [1, 1]], // O-shape
-            [[1], [1], [1], [1]], // I-shape
-            [[1, 0], [1, 0], [1, 1]], // L-shape
-            [[0, 1], [0, 1], [1, 1]], // J-shape
-            [[0, 1], [1, 1], [1, 0]], // S-shape
-            [[1, 0], [1, 1], [0, 1]], // Z-shape
-            [[1, 1, 1], [0, 1, 0]] // T-shape
-        ];
+        const packageShape = packageShapeValues[index];
+        this.setShapeInfo(packageShape);
+    }
 
-        const index = Math.floor(Math.random() * shapes.length);
-        this._shape = shapes[index];
-        this._shapeInfo = shapeInfo[index];
-
+    setShapeInfo(packageShape) {
+        this._shape = packageShape['shape'];
+        this._shapeInfo = packageShape['info'];
     }
 
     calculateWidth() {

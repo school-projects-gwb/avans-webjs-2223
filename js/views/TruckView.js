@@ -7,9 +7,10 @@ export default class TruckView {
 
     render(truck) {
         const truckElement = document.createElement('div');
-        truckElement.style.background = 'lightblue';
+        truckElement.id = truck.id;
+        truckElement.style.margin = '1rem';
         truckElement.style.border = "3px solid black";
-        truckElement.classList.add('transition');
+        truckElement.classList.add('transition', 'truck', 'regular');
         truckElement.style.gridRow = `span ${truck.height} / ${truck.posY}`;
 
         truckElement.style.display = "grid";
@@ -24,6 +25,7 @@ export default class TruckView {
                     cell.style.backgroundColor = truck.grid[y][x]['color'];
                 }
                 cell.style.border = "1px solid black";
+                cell.style.pointerEvents = 'none';
                 truckElement.appendChild(cell);
             }
         }

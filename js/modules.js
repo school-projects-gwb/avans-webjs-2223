@@ -5,6 +5,8 @@ import MainController from "./controllers/MainController.js";
 import LoadingHallController from "./controllers/LoadingHallController.js";
 import ConveyorBeltController from "./controllers/ConveyorBeltController.js";
 import TruckController from "./controllers/TruckController.js";
+import DragAndDropController from "./controllers/DragAndDropController.js";
+import EventEmitter from "./helpers/EventEmitter.js";
 
 // Models
 import LoadingHall from "./models/LoadingHall.js";
@@ -15,6 +17,7 @@ import Truck from "./models/Truck.js";
 import TruckForm from "./models/TruckForm.js";
 import TruckType from "./models/TruckType.js";
 import TruckState from "./models/TruckState.js";
+import PackageShape from "./models/PackageShape.js";
 import TruckObject from "./models/TruckObject.js";
 import Package from "./models/Package.js";
 
@@ -26,6 +29,7 @@ import TruckView from "./views/TruckView.js";
 import TruckCreatorView from "./views/TruckCreatorView.js";
 import TruckOverviewView from "./views/TruckOverviewView.js";
 import PackageView from "./views/PackageView.js";
+import DragAndDropToggleView from "./views/DragAndDropToggleView.js";
 import DOM from "./views/DOM.js";
 
 // View components
@@ -40,6 +44,7 @@ export {
     LoadingHallController,
     ConveyorBeltController,
     TruckController,
+    DragAndDropController,
 
     // Models
     LoadingHall,
@@ -49,6 +54,7 @@ export {
     TruckForm,
     TruckType,
     TruckState,
+    PackageShape,
     Truck,
     TruckObject,
     Package,
@@ -61,11 +67,14 @@ export {
     TruckCreatorView,
     TruckOverviewView,
     PackageView,
+    DragAndDropToggleView,
     DOM,
 
     // View components
     ButtonLink,
     BlockTitle,
     TextInput,
-    SelectInput
+    SelectInput,
+
+    EventEmitter
 }
