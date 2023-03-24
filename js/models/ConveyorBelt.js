@@ -7,6 +7,7 @@ export default class ConveyorBelt {
         this._startPosX = startPosX;
         this._packageCount = 12;
         this._packages = [];
+        this._markedPackageIndexes = [];
         for (let i = 0; i < this._packageCount; i++) {
             this._packages.push(new Package(i, i+1, this._posY+1));
         }
@@ -66,7 +67,13 @@ export default class ConveyorBelt {
             for (const [index, truck] of truckWrapper.trucks.entries()) {
                 if (truck.isLoaded() && truck.state === TruckState.DOCKED) truck.state = TruckState.LOADED;
                 if (truck.state === TruckState.LEAVING) truckWrapper._trucks.splice(index, 1);
+                truck.loadPackage();
             }
+        }
+
+        for (let index of this._markedPackageIndexes) {
+            this._packages.splice(index, 1);
+            this.fillEmptySpot(index);
         }
 
         // Package generation and movement
@@ -85,11 +92,12 @@ export default class ConveyorBelt {
 
                 if (!truckObject.isLoaded() && truckObject.state === TruckState.DOCKED) {
                     const packageFits = truckObject.packageFits(pack);
-                    truckObject.addPackage(packageFits);
+                    if (packageFits) {
+                        truckObject.addPackage(packageFits);
+                        pack.state = TruckState.LEAVING;
+                    }
 
-                    const indexToDelete = index;
-                    this._packages.splice(indexToDelete, 1);
-                    this.fillEmptySpot(indexToDelete);
+                    this._markedPackageIndexes.push(index);
                 }
             }
         }

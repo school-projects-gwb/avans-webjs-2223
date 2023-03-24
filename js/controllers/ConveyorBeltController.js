@@ -18,11 +18,11 @@ export default class ConveyorBeltController {
     setConveyorBelts() { 
         this._conveyorBelts = this._terrain.conveyorBelts;
         this._conveyorBeltView = new ConveyorBeltView(this._targetElementId, this._conveyorBelts);
-        this._conveyorBeltView.render();
     };
 
     render() {
         document.getElementById(this._targetElementId).innerHTML = '';
+        this._conveyorBeltView.render();
         for (const conveyorBelt of this._conveyorBelts) {
             conveyorBelt.handlePackageLoading();
             const trucks = conveyorBelt.trucks;
@@ -39,6 +39,7 @@ export default class ConveyorBeltController {
             for (const pack of packages) {
                 this._packageView.render(pack);
                 if (pack.state === TruckState.ENTERING) pack.state = TruckState.DOCKED;
+                if (pack.state === TruckState.LOADED) pack.state = TruckState.LEAVING;
             }
         }
     }

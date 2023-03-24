@@ -20,8 +20,8 @@ export default class TruckView {
         for (let y = 0; y < truck.height; y++) {
             for (let x = 0; x < truck.width; x++) {
                 const cell = document.createElement("div");
-                if (truck.grid[y][x] !== 0) {
-                    cell.style.backgroundColor = 'orange';
+                if (truck.grid[y][x]['number'] !== 0 && truck.grid[y][x]['number'] !== 2) {
+                    cell.style.backgroundColor = truck.grid[y][x]['color'];
                 }
                 cell.style.border = "1px solid black";
                 truckElement.appendChild(cell);

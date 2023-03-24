@@ -7,9 +7,6 @@ export default class TruckObject {
         this._posY = posY;
         this._posX = posX;
         this._state = TruckState.ENTERING;
-        //testing purposes
-        this._maxPackages = 2;
-        this._packageCount = 0;
         this._noFit = 0;
         this._noFitLimit = 3;
 
@@ -17,14 +14,10 @@ export default class TruckObject {
         for (let i = 0; i < height; i++) {
             let row = [];
             for (let j = 0; j < width; j++) {
-                row.push(0);
+                row.push({'number': 0, 'color': ''});
             }
             this._grid.push(row);
         }
-    }
-
-    get packageCount() {
-        return this._packageCount;
     }
 
     isLoaded() {
@@ -35,6 +28,7 @@ export default class TruckObject {
         const packWidth = packObject.width;
         const packHeight = packObject.height;
         const pack = packObject.shape;
+        const color = packObject.shapeInfo.color;
 
         // Check all 4 possible rotations
         for (let r = 0; r < 4; r++) {
@@ -63,7 +57,7 @@ export default class TruckObject {
                         for (let l = 0; l < rotatedWidth; l++) {
                             if (
                                 (j + l >= this.width || i + k >= this.height) ||
-                                (this._grid[i + k][j + l] !== 0 && rotatedPack[k][l] !== 0)
+                                (this._grid[i + k][j + l]['number'] !== 0 && rotatedPack[k][l]['number'] !== 0)
                             ) {
                                 canFit = false;
                                 break;
@@ -74,7 +68,7 @@ export default class TruckObject {
                         }
                     }
                     if (canFit) {
-                        return { width: rotatedWidth, height: rotatedHeight, shape: rotatedPack, x: j, y: i };
+                        return { width: rotatedWidth, height: rotatedHeight, shape: rotatedPack, x: j, y: i, color: color };
                     }
                 }
             }
@@ -83,6 +77,16 @@ export default class TruckObject {
         // No rotation fits
         this._noFit++;
         return false;
+    }
+
+    loadPackage() {
+        for (let y = 0; y < this._height; y++) {
+            for (let x = 0; x < this._width; x++) {
+                if (this._grid[y][x]['number'] === 2) {
+                    this._grid[y][x]['number'] = 1;
+                }
+            }
+        }
     }
 
     addPackage(packObject) {
@@ -105,7 +109,7 @@ export default class TruckObject {
         for (let k = 0; k < packHeight; k++) {
             for (let l = 0; l < packWidth; l++) {
                 if (pack[k][l] !== 0) {
-                    this._grid[startY + k][startX + l] = pack[k][l];
+                    this._grid[startY + k][startX + l] = {number: 2, color: packObject.color};
                 }
             }
         }
@@ -149,9 +153,5 @@ export default class TruckObject {
 
     set isDocked(newIsDocked) {
         this._isDocked = newIsDocked;
-    }
-
-    get isDocked() {
-        return this._isDocked;
     }
 }

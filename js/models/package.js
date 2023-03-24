@@ -47,13 +47,22 @@ export default class Package {
         return this._shape;
     }
 
-    get shapeName() {
-        return this._shapeName;
+    get shapeInfo() {
+        return this._shapeInfo;
     }
 
     generateRandomShape() {
         // All possible Tetromino shapes
-        const shapeNames = ['o', 'i', 'l', 'j', 's', 'z', 't'];
+        const shapeInfo = [
+            {name: 'o', color: 'pink'},
+            {name: 'i', color: 'yellow'},
+            {name: 'l', color: 'orange'},
+            {name: 'j', color: 'red'},
+            {name: 's', color: 'blue'},
+            {name: 'z', color: 'purple'},
+            {name: 't', color: 'green'}
+        ];
+
         const shapes = [
             [[1, 1], [1, 1]], // O-shape
             [[1], [1], [1], [1]], // I-shape
@@ -66,7 +75,8 @@ export default class Package {
 
         const index = Math.floor(Math.random() * shapes.length);
         this._shape = shapes[index];
-        this._shapeName = shapeNames[index];
+        this._shapeInfo = shapeInfo[index];
+
     }
 
     calculateWidth() {
