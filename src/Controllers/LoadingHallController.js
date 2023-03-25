@@ -5,6 +5,7 @@ import {
     TruckController,
     DragAndDropController, EventEmitter
 } from '../modules.js';
+import AddOrRemovveConveyorBeltView from '../Views/AddOrRemoveConveyorBeltView.js';
 
 export default class LoadingHallController {
     /**
@@ -33,7 +34,7 @@ export default class LoadingHallController {
     render() {
         this._loadingHallSwitcherView = new LoadingHallSwitcherView(this.switchLoadingHall.bind(this), this._terrain.loadingHalls, 'section-left');
         this._conveyorBeltController.setConveyorBelts();
-
+        this._addOrRemoveConveorBelt = new AddOrRemovveConveyorBeltView(this._conveyorBeltController.updateConveyorBelt.bind(this._conveyorBeltController), 'section-left');
         clearInterval(this._renderInterval);
 
         this._renderInterval = setInterval(() => {

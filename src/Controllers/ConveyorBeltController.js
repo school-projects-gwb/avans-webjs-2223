@@ -68,4 +68,14 @@ export default class ConveyorBeltController {
         const currentPosY = incrementPosY + (loadingHall.conveyorBelts.length * incrementPosY);
         return new ConveyorBelt(currentPosY, startPosX, endPosX, this._eventEmitter);
     }
+
+    updateConveyorBelt(addConveyorBelt) {
+        const conveyorBeltAmount = this._terrain.activeLoadingHall.conveyorBelts.length;
+        if (addConveyorBelt === '1' && conveyorBeltAmount < 3) {
+          this._terrain.activeLoadingHall.conveyorBelts.push(this.createConveyorBelt());
+        } else if (addConveyorBelt === '0' && conveyorBeltAmount > 1) {
+          this._terrain.activeLoadingHall.conveyorBelts.pop();
+        }
+        this.setConveyorBelts();
+      }   
 }
