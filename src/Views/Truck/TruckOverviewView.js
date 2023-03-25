@@ -13,9 +13,9 @@ export default class TruckOverviewView {
         DOM.deleteIfExists(this._wrapperElementId);
 
         const wrapperElement = DOM.create('div');
+        wrapperElement.id = this._wrapperElementId;
         wrapperElement.appendChild(new BlockTitle("Trucks"));
 
-        console.log(this._trucks[0]);
         for (const truck of this._trucks) {
             const truckWrapper = DOM.create('div');
             truckWrapper.style.background = 'lightgray';
@@ -50,6 +50,11 @@ export default class TruckOverviewView {
             wrapperElement.appendChild(truckWrapper);
         }
 
-        DOM.getById(this._targetElementId).appendChild(wrapperElement);
+        if (DOM.getById(this._targetElementId).children.length > 1) {
+            DOM.getById(this._targetElementId).insertBefore(wrapperElement, DOM.getById(this._targetElementId).lastChild);
+        } else {
+            DOM.getById(this._targetElementId).appendChild(wrapperElement);
+        }
+
     }
 }

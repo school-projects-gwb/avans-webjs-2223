@@ -20,7 +20,7 @@ export default class Terrain {
         const currentActive = this._loadingHalls.find(hall => hall.getIsActive() === true);
         currentActive?.setIsActive(false);
 
-        const newActive = this._loadingHalls.find(hall => hall.id === id);
+        const newActive = this._loadingHalls.find(hall => hall.id == id);
         newActive.setIsActive(true);
 
         this._activeLoadingHall = newActive;

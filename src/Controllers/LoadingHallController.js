@@ -58,6 +58,7 @@ export default class LoadingHallController {
         if (selectedHall.getIsActive()) return;
         this._terrain.activeLoadingHall = id;
         this.render();
+        this._truckController.render();
         this._eventEmitter.emit('loadingHallSwitched', {});
     }
 }

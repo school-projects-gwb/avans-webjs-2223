@@ -16,11 +16,11 @@ export default class TruckController {
         this._terrain.activeLoadingHall.addTruck(truck3);
 
         this.render();
+        this._truckCreatorView = new TruckCreatorView(this.createTruck.bind(this), this._targetElementId, new TruckForm);
     }
 
     render() {
         this._truckOverviewView = new TruckOverviewView(this.deleteTruck.bind(this), this._targetElementId, this._terrain.activeLoadingHall.getTrucks());
-        this._truckCreatorView = new TruckCreatorView(this.createTruck.bind(this), this._targetElementId, new TruckForm);
     }
 
     deleteTruck(truckId) {
