@@ -40,7 +40,7 @@ export default class TruckForm {
                     }
                     break;
                 case 'values':
-                    const found = validationField.values.find(v => v == value);
+                    const found = validationField.values.find(v => v === value);
                     if (!found) validationResult[name] = `${validationField.label} heeft geen valide waarde.`;
                     break;
             }

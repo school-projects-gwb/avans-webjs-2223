@@ -2,6 +2,7 @@ import {TruckObject} from "../modules.js";
 
 export default class Truck {
     constructor(width, height, arrivalInterval, type) {
+        this._id = Math.floor(Math.random() * 10000);
         this._width = width;
         this._height = height;
         this._arrivalInterval = arrivalInterval * 1000;
@@ -44,5 +45,13 @@ export default class Truck {
 
     set posY(newPosY) {
         this._posY = newPosY;
+    }
+
+    get arrivalInterval() {
+        return (this._arrivalInterval / 1000);
+    }
+
+    get id() {
+        return this._id;
     }
 }

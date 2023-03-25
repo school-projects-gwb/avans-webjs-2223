@@ -1,5 +1,3 @@
-import { LoadingHall } from "../modules.js";
-
 export default class Terrain {
     set loadingHalls(loadingHalls) {
         this._loadingHalls = loadingHalls;
@@ -15,14 +13,14 @@ export default class Terrain {
     }
 
     get activeLoadingHall() {
-        return this._loadingHalls.find(hall => hall.getIsActive() == true);
+        return this._loadingHalls.find(hall => hall.getIsActive() === true);
     }
 
     set activeLoadingHall(id) {
-        const currentActive = this._loadingHalls.find(hall => hall.getIsActive() == true);
+        const currentActive = this._loadingHalls.find(hall => hall.getIsActive() === true);
         currentActive?.setIsActive(false);
 
-        const newActive = this._loadingHalls.find(hall => hall.id == id);
+        const newActive = this._loadingHalls.find(hall => hall.id === id);
         newActive.setIsActive(true);
 
         this._activeLoadingHall = newActive;

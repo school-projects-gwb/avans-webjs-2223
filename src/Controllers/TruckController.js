@@ -7,7 +7,6 @@ export default class TruckController {
     constructor(terrain, targetElementId) {
         this._terrain = terrain;
         this._targetElementId = targetElementId;
-        this.render();
 
         const truck = new Truck(2, 3, 2, "DEFAULT");
         const truck2 = new Truck(6, 3, 3, "DEFAULT");
@@ -15,6 +14,8 @@ export default class TruckController {
         this._terrain.activeLoadingHall.addTruck(truck);
         this._terrain.activeLoadingHall.addTruck(truck2);
         this._terrain.activeLoadingHall.addTruck(truck3);
+
+        this.render();
     }
 
     render() {
@@ -23,7 +24,7 @@ export default class TruckController {
     }
 
     deleteTruck(truckId) {
-
+        console.log(truckId);
     }
 
     createTruck(truckForm) {
