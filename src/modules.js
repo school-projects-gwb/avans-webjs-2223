@@ -30,6 +30,7 @@ import TruckCreatorView from "./Views/Truck/TruckCreatorView.js";
 import TruckOverviewView from "./Views/Truck/TruckOverviewView.js";
 import PackageView from "./Views/PackageView.js";
 import DragAndDropToggleView from "./Views/DragAndDropToggleView.js";
+import AddOrRemovveConveyorBeltView from "./Views/AddOrRemoveConveyorBeltView.js";
 import DOM from "./Views/DOM.js";
 
 // View Components
@@ -64,6 +65,7 @@ export {
 
     // Views
     LoadingHallSwitcherView,
+    AddOrRemovveConveyorBeltView,
     ConveyorBeltView,
     TruckView,
     TruckCreatorView,
