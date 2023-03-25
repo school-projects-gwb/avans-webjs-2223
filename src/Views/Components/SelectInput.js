@@ -1,6 +1,13 @@
 import {DOM} from "../../modules.js";
 
 export default class SelectInput {
+    /**
+     * @param { object } options
+     * @param { object } defaultOption
+     * @param { string } name
+     * @param { string } labelText
+     * @returns { HTMLInputElement }
+     */
     constructor(options, defaultOption, name, labelText) {
         const wrapper = DOM.create('div');
         wrapper.classList.add('flex-col', 'input-wrapper');

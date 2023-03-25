@@ -1,6 +1,14 @@
 import {EventEmitter, Package, ObjectState, PackageShape} from "../modules.js";
 
 export default class TruckObject {
+    /**
+     *
+     * @param { string } id
+     * @param { int } posX
+     * @param { int } posY
+     * @param { int } width
+     * @param { int } height
+     */
     constructor(id, posX, posY, width, height) {
         this._width = width;
         this._id = `truck-${id}`;

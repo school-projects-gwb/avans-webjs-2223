@@ -1,6 +1,11 @@
 import {DOM} from "../../modules.js";
 
 export default class TextInput {
+    /**
+     * @param { string } name
+     * @param { string } labelText
+     * @returns { HTMLInputElement }
+     */
     constructor(name, labelText) {
         const wrapper = DOM.create('div');
         wrapper.classList.add('flex-col', 'input-wrapper');

@@ -1,6 +1,12 @@
 import {BlockTitle, DOM} from "../../modules.js";
 
 export default class TruckOverviewView {
+    /**
+     * @param { function } callbackFunction
+     * @param { string } targetElementId
+     * @param { Truck[] } trucks
+     * @param { boolean } minimumTruckLimit
+     */
     constructor(callbackFunction, targetElementId, trucks, minimumTruckLimit) {
         this._callbackFunction = callbackFunction;
         this._targetElementId = targetElementId;

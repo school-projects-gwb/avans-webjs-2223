@@ -1,6 +1,11 @@
 import {LoadingHall, ButtonLink, BlockTitle, DOM} from '../modules.js';
 
 export default class LoadingHallSwitcherView {
+    /**
+     * @param { function } callbackFunction
+     * @param { LoadingHall[] } loadingHalls
+     * @param { string } targetElementId
+     */
     constructor(callbackFunction, loadingHalls, targetElementId) {
         this._targetElementId = targetElementId;
         this._callbackFunction = callbackFunction;

@@ -1,6 +1,9 @@
 import {DOM, ObjectState} from "../../modules.js";
 
 export default class TruckView {
+    /**
+     * @param { string } targetElementId
+     */
     constructor(targetElementId) {
         this._targetElementId = targetElementId;
     }
@@ -9,7 +12,6 @@ export default class TruckView {
         const truckElement = DOM.create('div');
         truckElement.id = truck.id;
         truckElement.style.margin = '1rem';
-        truckElement.style.border = "3px solid black";
         truckElement.classList.add('transition', 'truck', 'regular');
         truckElement.style.gridRow = `span ${truck.height} / ${truck.posY}`;
 
@@ -24,15 +26,9 @@ export default class TruckView {
                 if (truck.grid[y][x]['number'] !== 0 && truck.grid[y][x]['number'] !== 2) {
                     cell.style.backgroundColor = truck.grid[y][x]['color'];
                 }
-                cell.style.border = "1px solid black";
-                cell.style.pointerEvents = 'none';
+                cell.classList.add('cell');
                 truckElement.appendChild(cell);
             }
-        }
-        for (let i = 0; i < truck.width * truck.height; i++) {
-            const cell = DOM.create('div');
-            cell.style.border = "1px solid black";
-            truckElement.appendChild(cell);
         }
 
         if (truck.state === ObjectState.ENTERING) {
@@ -41,7 +37,7 @@ export default class TruckView {
 
             setTimeout(() => {
                 truckElement.style.gridColumn = `span ${truck.width} / ${truck.posX + 1}`;
-            }, 100);
+            }, 200);
         } else if (truck.state === ObjectState.LOADED) {
             truckElement.style.gridColumn = `span ${truck.width} / ${truck.posX + 1}`;
             truckElement.style.transition = 'transform 0.3s ease-out';

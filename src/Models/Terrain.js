@@ -1,4 +1,8 @@
 export default class Terrain {
+    /**
+     *
+     * @param { LoadingHall[] } loadingHalls
+     */
     set loadingHalls(loadingHalls) {
         this._loadingHalls = loadingHalls;
         this.activeLoadingHall = loadingHalls[0].id;

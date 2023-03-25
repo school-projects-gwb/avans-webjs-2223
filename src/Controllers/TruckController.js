@@ -1,32 +1,31 @@
-import {Truck, TruckCreatorView, TruckForm, TruckOverviewView} from '../modules.js';
+import {Truck, TruckCreatorView, TruckForm, TruckOverviewView, TruckType} from '../modules.js';
 
 export default class TruckController {
     /**
-     * @param { Terrain } terrain 
+     * @param { Terrain } terrain
+     * @param { string } targetElementId
      */
     constructor(terrain, targetElementId) {
         this._terrain = terrain;
         this._targetElementId = targetElementId;
 
-        const truck = new Truck(2, 3, 2, "DEFAULT");
-        const truck2 = new Truck(6, 3, 3, "DEFAULT");
-        const truck3 = new Truck(3, 3, 5, "DEFAULT");
-        this._terrain.activeLoadingHall.addTruck(truck);
-        this._terrain.activeLoadingHall.addTruck(truck2);
-        this._terrain.activeLoadingHall.addTruck(truck3);
+        this._terrain.activeLoadingHall.addTruck(new Truck(2, 3, 2, TruckType.COLD));
+        this._terrain.activeLoadingHall.addTruck(new Truck(6, 3, 3, TruckType.GENERAL));
+        this._terrain.loadingHalls[1].addTruck(new Truck(2, 3, 2, TruckType.FRAGILE));
+        this._terrain.loadingHalls[1].addTruck(new Truck(6, 3, 3, TruckType.PALLET));
 
         this.render();
     }
 
     render() {
-        this._truckOverviewView = new TruckOverviewView(
+        new TruckOverviewView(
             this.removeTruck.bind(this),
             this._targetElementId,
             this._terrain.activeLoadingHall.getTrucks(),
             this._terrain.activeLoadingHall.isMinimumTruckLimit()
         );
 
-        this._truckCreatorView = new TruckCreatorView(
+        new TruckCreatorView(
             this.createTruck.bind(this),
             this._targetElementId,
             new TruckForm,

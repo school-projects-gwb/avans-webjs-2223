@@ -1,3 +1,6 @@
+/**
+ * @type {{listeners: Map<any, any>, emit(*, ...[*]): void, on(*, *): void}}
+ */
 const eventEmitter = {
     listeners: new Map(),
 

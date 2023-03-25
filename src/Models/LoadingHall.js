@@ -2,9 +2,8 @@ import { Truck } from "../modules.js";
 
 export default class LoadingHall {
     /**
-     * 
-     * @param {string} name
-     * @param {any} id 
+     * @param { string } name
+     * @param { any } id
      */
     constructor(name, id) {
         this._name = name;
@@ -55,7 +54,8 @@ export default class LoadingHall {
     }
 
     isMaximumTruckLimit() {
-        return this.getTrucks().length === this._conveyorBelts.length * 3
+        const beltTruckLimit = 2;
+        return this.getTrucks().length === this._conveyorBelts.length * beltTruckLimit;
     }
 
     getTrucks() {

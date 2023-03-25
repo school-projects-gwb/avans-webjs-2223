@@ -1,6 +1,12 @@
 import {PackageShape, ObjectState} from "../modules.js";
 
 export default class Package {
+    /**
+     * @param { string } id
+     * @param { int } posX
+     * @param { int } posY
+     * @param { PackageShape } packageShape
+     */
     constructor(id, posX, posY, packageShape = null) {
         packageShape == null ? this.generateRandomShape() : this.setShapeInfo(packageShape);
         this._width = this.calculateWidth();

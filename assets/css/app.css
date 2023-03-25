@@ -2,6 +2,7 @@
     --bg-primary: #FFFFFF;
     --bg-secondary: #E5E7EB;
     --color-accent: #6949C9;
+    --color-accent-light: #9c7dff;
 }
 
 body {
@@ -162,5 +163,25 @@ main {
 }
 
 .truck.regular {
-    background-color: lightblue;
+    background-color: var(--color-accent-light);
+}
+
+.truck {
+    position: relative;
+    border: 2px solid var(--color-accent);
+}
+
+.truck .cell {
+    border: 1px solid var(--color-accent);
+    pointer-events: none;
+}
+
+.conveyorBelt {
+    background: repeating-linear-gradient(
+        90deg,
+        var(--color-accent-light),
+        var(--color-accent-light) 10px,
+        var(--color-accent) 10px,
+        var(--color-accent) 20px
+    );
 }

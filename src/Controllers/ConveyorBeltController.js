@@ -1,9 +1,9 @@
-import {ConveyorBelt, ConveyorBeltView, ObjectState, TruckView, PackageView, DOM } from '../modules.js';
+import { EventEmitter, ConveyorBelt, ConveyorBeltView, ObjectState, TruckView, PackageView, DOM } from '../modules.js';
 
 export default class ConveyorBeltController {
     /**
      * @param { Terrain } terrain
-     * @param targetElementId
+     * @param { string } targetElementId
      * @param { EventEmitter } eventEmitter
      */
     constructor(terrain, targetElementId, eventEmitter) {

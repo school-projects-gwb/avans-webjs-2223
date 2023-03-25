@@ -1,6 +1,13 @@
-import {ConveyorBeltDock, Package, ObjectState} from "../modules.js";
+import { EventEmitter, ConveyorBeltDock, Package, ObjectState} from "../modules.js";
 
 export default class ConveyorBelt {
+    /**
+     *
+     * @param { int } posY
+     * @param { int } startPosX
+     * @param { int } endPosX
+     * @param { EventEmitter } eventEmitter
+     */
     constructor(posY, startPosX, endPosX, eventEmitter) {
         this._posY = posY;
         this._trucks = [];

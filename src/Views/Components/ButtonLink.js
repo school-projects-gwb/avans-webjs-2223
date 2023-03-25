@@ -1,6 +1,13 @@
 import {DOM} from "../../modules.js";
 
 export default class ButtonLink {
+    /**
+     * @param { boolean } isPrimary
+     * @param { string } textContent
+     * @param { int } id
+     * @param { function } callback
+     * @returns { HTMLElement }
+     */
     constructor(isPrimary, textContent, id, callback) {
         const element = DOM.create('a');
         element.classList.add('btn', 'rounded-xl');

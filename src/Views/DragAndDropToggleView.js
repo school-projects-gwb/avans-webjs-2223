@@ -1,6 +1,11 @@
 import {BlockTitle, ButtonLink, DOM} from "../modules.js";
 
 export default class DragAndDropToggleView {
+    /**
+     * @param { function } callbackFunction
+     * @param { string } targetElementId
+     * @param { boolean } isDragAndDrop
+     */
     constructor(callbackFunction, targetElementId, isDragAndDrop) {
         this._isDragAndDrop = isDragAndDrop;
         this._callbackFunction = callbackFunction;

@@ -1,6 +1,12 @@
 import {TruckObject} from "../modules.js";
 
 export default class Truck {
+    /**
+     * @param { int } width
+     * @param { int } height
+     * @param { int } arrivalInterval
+     * @param { TruckType } type
+     */
     constructor(width, height, arrivalInterval, type) {
         this._id = Math.floor(Math.random() * 10000);
         this._width = width;

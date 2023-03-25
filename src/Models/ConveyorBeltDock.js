@@ -1,4 +1,7 @@
 export default class ConveyorBeltDock {
+    /**
+     * @param { int } posX
+     */
     constructor(posX) {
         this._posX = posX;
     }

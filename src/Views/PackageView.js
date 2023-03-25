@@ -1,6 +1,9 @@
 import {DOM, ObjectState} from "../modules.js";
 
 export default class PackageView {
+    /**
+     * @param { string } targetElementId
+     */
     constructor(targetElementId) {
         this._targetElementId = targetElementId;
     }
@@ -9,7 +12,7 @@ export default class PackageView {
         const packageElement = DOM.create('div');
         packageElement.classList.add('transition', 'package', pack.shapeInfo['name']);
         packageElement.style.gridRow = `span ${1} / ${pack.posY}`;
-        packageElement.style.margin = '.5rem';
+        packageElement.style.margin = '.1rem';
         packageElement.draggable = true;
 
         if (pack.state === ObjectState.ENTERING) {

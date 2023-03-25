@@ -1,6 +1,12 @@
 import { BlockTitle, ButtonLink, TextInput, DOM, TruckType, SelectInput } from '../../modules.js';
 
 export default class TruckCreatorView {
+    /**
+     * @param { function } callbackFunction
+     * @param { string } targetElementId
+     * @param { TruckForm } truckForm
+     * @param { boolean } maximumTruckLimit
+     */
     constructor(callbackFunction, targetElementId, truckForm, maximumTruckLimit) {
         this._callbackFunction = callbackFunction;
         this._truckForm = truckForm;
