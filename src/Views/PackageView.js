@@ -1,4 +1,4 @@
-import { ObjectState } from "../modules.js";
+import {DOM, ObjectState} from "../modules.js";
 
 export default class PackageView {
     constructor(targetElementId) {
@@ -6,7 +6,7 @@ export default class PackageView {
     }
 
     render(pack) {
-        const packageElement = document.createElement('div');
+        const packageElement = DOM.create('div');
         packageElement.classList.add('transition', 'package', pack.shapeInfo['name']);
         packageElement.style.gridRow = `span ${1} / ${pack.posY}`;
         packageElement.style.margin = '.5rem';
@@ -31,6 +31,6 @@ export default class PackageView {
             packageElement.style.gridColumn = `span ${1} / ${pack.posX + 1}`;
         }
 
-        document.getElementById(this._targetElementId).appendChild(packageElement);
+        DOM.getById(this._targetElementId).appendChild(packageElement);
     }
 }

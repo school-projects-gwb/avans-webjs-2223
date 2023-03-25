@@ -1,4 +1,4 @@
-import {ConveyorBelt, ConveyorBeltView, ObjectState, TruckView, PackageView } from '../modules.js';
+import {ConveyorBelt, ConveyorBeltView, ObjectState, TruckView, PackageView, DOM } from '../modules.js';
 
 export default class ConveyorBeltController {
     /**
@@ -23,7 +23,7 @@ export default class ConveyorBeltController {
     };
 
     render() {
-        document.getElementById(this._targetElementId).innerHTML = '';
+        DOM.getById(this._targetElementId).innerHTML = '';
         this._conveyorBeltView.render();
         for (const conveyorBelt of this._conveyorBelts) {
             conveyorBelt.handlePackageLoading();

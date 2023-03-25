@@ -1,17 +1,19 @@
+import {DOM} from "../../modules.js";
+
 export default class TextInput {
     constructor(name, labelText) {
-        const wrapper = document.createElement('div');
+        const wrapper = DOM.create('div');
         wrapper.classList.add('flex-col', 'input-wrapper');
 
-        const input = document.createElement('input');
+        const input = DOM.create('input');
         input.name = name;
         input.id = name;
 
-        const label = document.createElement('label');
+        const label = DOM.create('label');
         label.innerHTML = labelText;
         label.for = name;
 
-        const errors = document.createElement('span');
+        const errors = DOM.create('span');
         errors.id = `${name}-errors`;
 
         wrapper.appendChild(label);

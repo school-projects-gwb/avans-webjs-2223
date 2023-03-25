@@ -1,6 +1,8 @@
+import {DOM} from "../../modules.js";
+
 export default class ButtonLink {
     constructor(isPrimary, textContent, id, callback) {
-        const element = document.createElement('a');
+        const element = DOM.create('a');
         element.classList.add('btn', 'rounded-xl');
         element.style.margin = '1rem 0.25rem 1rem 0.25rem';
         element.innerHTML = textContent;       

@@ -1,4 +1,4 @@
-import {BlockTitle, ButtonLink} from "../modules.js";
+import {BlockTitle, ButtonLink, DOM} from "../modules.js";
 
 export default class DragAndDropToggleView {
     constructor(callbackFunction, targetElementId, isDragAndDrop) {
@@ -10,18 +10,18 @@ export default class DragAndDropToggleView {
     }
 
     render() {
-        const existsCheck = document.getElementById(this._wrapperElementId)
+        const existsCheck = DOM.getById(this._wrapperElementId);
         if (existsCheck) {
             existsCheck.remove();
         }
 
-        const wrapperElement = document.createElement('div');
+        const wrapperElement = DOM.create('div');
         wrapperElement.appendChild(new BlockTitle("Drag & Drop"));
         wrapperElement.classList.add('flex-col');
         wrapperElement.style.marginTop = '.75rem';
         wrapperElement.id = this._wrapperElementId;
 
-        const buttonWrapper = document.createElement('div');
+        const buttonWrapper = DOM.create('div');
         buttonWrapper.style.display = 'flex';
         buttonWrapper.style.justifyContent = 'space-between';
 
@@ -47,7 +47,7 @@ export default class DragAndDropToggleView {
         buttonWrapper.appendChild(disableElement);
         wrapperElement.appendChild(buttonWrapper);
 
-        const targetElement = document.getElementById(this._targetElementId);
+        const targetElement = DOM.getById(this._targetElementId);
         targetElement.insertBefore(wrapperElement, targetElement.children[1]);
     }
 }

@@ -1,4 +1,4 @@
-import { LoadingHall, ButtonLink, BlockTitle } from '../modules.js';
+import {LoadingHall, ButtonLink, BlockTitle, DOM} from '../../modules.js';
 
 export default class LoadingHallSwitcherView {
     constructor(callbackFunction, loadingHalls, targetElementId) {
@@ -10,17 +10,17 @@ export default class LoadingHallSwitcherView {
     }
 
     render() {
-        const existsCheck = document.getElementById(this.wrapperElementId)
+        const existsCheck = DOM.getById(this.wrapperElementId);
         if (existsCheck) {
             existsCheck.remove();
         }
 
-        const wrapperElement = document.createElement('div');
+        const wrapperElement = DOM.create('div');
         wrapperElement.appendChild(new BlockTitle("Laadhallen"));
         wrapperElement.classList.add('flex-col');
         wrapperElement.id = this.wrapperElementId;
 
-        const loadingHallWrapper = document.createElement('div');
+        const loadingHallWrapper = DOM.create('div');
         loadingHallWrapper.style.display = 'flex';
         loadingHallWrapper.style.justifyContent = 'space-between';
 
@@ -33,7 +33,7 @@ export default class LoadingHallSwitcherView {
 
         wrapperElement.appendChild(loadingHallWrapper);
 
-        const targetElement = document.getElementById(this.targetElementId);
+        const targetElement = DOM.getById(this.targetElementId);
         targetElement.insertBefore(wrapperElement, targetElement.firstChild);
     }
 }

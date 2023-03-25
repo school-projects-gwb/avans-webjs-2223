@@ -1,4 +1,4 @@
-import { BlockTitle, ButtonLink, TextInput, DOM, TruckType, SelectInput } from '../modules.js';
+import { BlockTitle, ButtonLink, TextInput, DOM, TruckType, SelectInput } from '../../modules.js';
 
 export default class TruckCreatorView {
     constructor(callbackFunction, targetElementId, truckForm) {
@@ -11,7 +11,7 @@ export default class TruckCreatorView {
     }
 
     renderBase() {
-        this.wrapperElement = document.createElement('div');
+        this.wrapperElement = DOM.create('div');
         this.wrapperElement.appendChild(new BlockTitle("truck toevoegen"));
         
         this.wrapperElement.style.display = 'flex';
@@ -20,16 +20,16 @@ export default class TruckCreatorView {
         this.wrapperElement.style.justifyContent = 'space-between';
         this.wrapperElement.id = this.wrapperElementId;
         
-        document.getElementById(this.targetElementId).appendChild(this.wrapperElement);
+        DOM.getById(this.targetElementId).appendChild(this.wrapperElement);
 
         this.renderStep(1);
     }
 
     renderStep(step) {
-        const existsCheck = document.getElementById(this.formWrapperElementId)
+        const existsCheck = DOM.getById(this.formWrapperElementId);
         if (existsCheck) existsCheck.remove();
 
-        const formWrapper = document.createElement('div');
+        const formWrapper = DOM.create('div');
         formWrapper.id = this.formWrapperElementId;
         formWrapper.style.display = 'grid';
         formWrapper.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
@@ -44,13 +44,13 @@ export default class TruckCreatorView {
                 break;
             case 2:
                 formWrapper.appendChild(new SelectInput(TruckType, TruckType.GENERAL, "type", "Type transport"));
-                formWrapper.appendChild(document.createElement('span'));
+                formWrapper.appendChild(DOM.create('span'));
                 formWrapper.appendChild(new ButtonLink(true, "3: Interval", step, this.submitStep.bind(this)));
                 formWrapper.appendChild(new ButtonLink(false, "Back", step, this.previousStep.bind(this)));
                 break;
             case 3:
                 formWrapper.appendChild(new TextInput("interval", "Interval (seconden)"));
-                formWrapper.appendChild(document.createElement('span'));
+                formWrapper.appendChild(DOM.create('span'));
                 formWrapper.appendChild(new ButtonLink(true, "Truck aanmaken", step, this.submitStep.bind(this)));
                 formWrapper.appendChild(new ButtonLink(false, "Back", step, this.previousStep.bind(this)));
                 break;

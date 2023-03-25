@@ -1,4 +1,4 @@
-import {ObjectState} from "../modules.js";
+import {DOM, ObjectState} from "../../modules.js";
 
 export default class TruckView {
     constructor(targetElementId) {
@@ -6,7 +6,7 @@ export default class TruckView {
     }
 
     render(truck) {
-        const truckElement = document.createElement('div');
+        const truckElement = DOM.create('div');
         truckElement.id = truck.id;
         truckElement.style.margin = '1rem';
         truckElement.style.border = "3px solid black";
@@ -20,7 +20,7 @@ export default class TruckView {
         // Add the grid cells to the truck element
         for (let y = 0; y < truck.height; y++) {
             for (let x = 0; x < truck.width; x++) {
-                const cell = document.createElement("div");
+                const cell = DOM.create('div');
                 if (truck.grid[y][x]['number'] !== 0 && truck.grid[y][x]['number'] !== 2) {
                     cell.style.backgroundColor = truck.grid[y][x]['color'];
                 }
@@ -30,7 +30,7 @@ export default class TruckView {
             }
         }
         for (let i = 0; i < truck.width * truck.height; i++) {
-            const cell = document.createElement("div");
+            const cell = DOM.create('div');
             cell.style.border = "1px solid black";
             truckElement.appendChild(cell);
         }
@@ -50,6 +50,6 @@ export default class TruckView {
             truckElement.style.gridColumn = `span ${truck.width} / ${truck.posX + 1}`;
         }
 
-        document.getElementById(this._targetElementId).appendChild(truckElement);
+        DOM.getById(this._targetElementId).appendChild(truckElement);
     }
 }

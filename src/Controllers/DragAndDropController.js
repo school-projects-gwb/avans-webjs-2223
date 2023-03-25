@@ -10,6 +10,10 @@ export default class DragAndDropController {
 
         this.render();
         EventEmitter.on('packageDragPlaced', this.resetTargetPackage.bind(this));
+
+        EventEmitter.on('loadingHallSwitched', event => {
+           this.toggleDragAndDrop(false);
+        });
     }
 
     resetTargetPackage() {
