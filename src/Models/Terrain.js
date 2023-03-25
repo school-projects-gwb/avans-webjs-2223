@@ -9,7 +9,7 @@ export default class Terrain {
     }
 
     get conveyorBelts() {
-        return this._activeLoadingHall.getConveyorBelts();
+        return this._activeLoadingHall.conveyorBelts;
     }
 
     get activeLoadingHall() {

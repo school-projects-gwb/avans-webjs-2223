@@ -9,13 +9,19 @@ export default class LoadingHall {
     constructor(name, id) {
         this._name = name;
         this._id = id;
+        this._conveyorBelts = [];
     }
 
     setIsActive = (isActive) => this._isActive = isActive;
     getIsActive = () => this._isActive;
 
-    setConveyorBelts = (conveyorBelts) => this._conveyorBelts = conveyorBelts;
-    getConveyorBelts = () => this._conveyorBelts;
+    set conveyorBelts(conveyorBelts) {
+        this._conveyorBelts = conveyorBelts;
+    }
+
+    get conveyorBelts() {
+        return this._conveyorBelts;
+    }
 
     get name() {
         return this._name;
