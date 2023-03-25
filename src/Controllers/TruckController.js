@@ -15,22 +15,28 @@ export default class TruckController {
         this._terrain.activeLoadingHall.addTruck(truck2);
         this._terrain.activeLoadingHall.addTruck(truck3);
 
-        this.render(this._terrain.activeLoadingHall.isMinimumTruckLimit());
-        this._truckCreatorView = new TruckCreatorView(this.createTruck.bind(this), this._targetElementId, new TruckForm);
+        this.render();
     }
 
-    render(minimumTruckLimit = false) {
+    render() {
         this._truckOverviewView = new TruckOverviewView(
             this.removeTruck.bind(this),
             this._targetElementId,
             this._terrain.activeLoadingHall.getTrucks(),
-            minimumTruckLimit
+            this._terrain.activeLoadingHall.isMinimumTruckLimit()
+        );
+
+        this._truckCreatorView = new TruckCreatorView(
+            this.createTruck.bind(this),
+            this._targetElementId,
+            new TruckForm,
+            this._terrain.activeLoadingHall.isMaximumTruckLimit()
         );
     }
 
     removeTruck(truckId) {
         this._terrain.activeLoadingHall.removeTruck(truckId);
-        this.render(this._terrain.activeLoadingHall.isMinimumTruckLimit());
+        this.render();
     }
 
     createTruck(truckForm) {
@@ -44,7 +50,6 @@ export default class TruckController {
             );
 
         this._terrain.activeLoadingHall.addTruck(truck);
-        this.render(this._terrain.activeLoadingHall.isMinimumTruckLimit());
-        this._truckCreatorView = new TruckCreatorView(this.createTruck.bind(this), this._targetElementId, new TruckForm);
+        this.render();
     }
 }

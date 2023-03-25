@@ -1,33 +1,41 @@
 import { BlockTitle, ButtonLink, TextInput, DOM, TruckType, SelectInput } from '../../modules.js';
 
 export default class TruckCreatorView {
-    constructor(callbackFunction, targetElementId, truckForm) {
+    constructor(callbackFunction, targetElementId, truckForm, maximumTruckLimit) {
         this._callbackFunction = callbackFunction;
         this._truckForm = truckForm;
         this._targetElementId = targetElementId;
         this._wrapperElementId = 'truck-creator';
         this._formWrapperElementId = 'truck-creator-form';
+        this._maximumTruckLimit = maximumTruckLimit;
         this.renderBase();
     }
 
     renderBase() {
         DOM.deleteIfExists(this._wrapperElementId);
+        DOM.deleteIfExists(this._formWrapperElementId);
+
         this._wrapperElement = DOM.create('div');
         this._wrapperElement.appendChild(new BlockTitle("truck toevoegen"));
-        
         this._wrapperElement.style.display = 'flex';
         this._wrapperElement.style.marginTop = '.75rem';
         this._wrapperElement.style.flexDirection = 'column';
         this._wrapperElement.style.justifyContent = 'space-between';
         this._wrapperElement.id = this._wrapperElementId;
+
+        if (this._maximumTruckLimit) {
+            const warning = DOM.create('span');
+            warning.innerHTML = 'Limiet bereikt!'
+            warning.style.color = 'red';
+            this._wrapperElement.appendChild(warning);
+        }
         
         DOM.getById(this._targetElementId).appendChild(this._wrapperElement);
 
-        this.renderStep(1);
+        if (!this._maximumTruckLimit) this.renderStep(1);
     }
 
     renderStep(step) {
-        DOM.deleteIfExists(this._formWrapperElementId);
         const formWrapper = DOM.create('div');
         formWrapper.id = this._formWrapperElementId;
         formWrapper.style.display = 'grid';
@@ -56,6 +64,7 @@ export default class TruckCreatorView {
         }
 
         this._wrapperElement.appendChild(formWrapper);
+        console.log(this._wrapperElement)
     }
 
     renderErrors(validationResult) {
@@ -81,6 +90,8 @@ export default class TruckCreatorView {
                 break;
         }
 
+        DOM.deleteIfExists(this._formWrapperElementId);
+
         if (Object.keys(validationResult) == 0) {
             if (step === 3) {
                 this._callbackFunction(this._truckForm);
@@ -93,5 +104,8 @@ export default class TruckCreatorView {
         }
     }
 
-    previousStep = (step) => this.renderStep(--step);
+    previousStep(step) {
+        this.renderStep(--step);
+        DOM.deleteIfExists(this._formWrapperElementId);
+    }
 }

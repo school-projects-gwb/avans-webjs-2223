@@ -58,6 +58,5 @@ export default class TruckOverviewView {
         } else {
             DOM.getById(this._targetElementId).appendChild(wrapperElement);
         }
-
     }
 }
