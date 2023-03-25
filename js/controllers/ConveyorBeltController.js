@@ -1,4 +1,4 @@
-import {ConveyorBelt, ConveyorBeltView, TruckState, TruckView, PackageView } from '../modules.js';
+import {ConveyorBelt, ConveyorBeltView, ObjectState, TruckView, PackageView } from '../modules.js';
 
 export default class ConveyorBeltController {
     /**
@@ -33,15 +33,15 @@ export default class ConveyorBeltController {
             for (const truckWrapper of trucks) {
                 for (const truck of truckWrapper.trucks) {
                     this._truckView.render(truck);
-                    if (truck.state === TruckState.ENTERING) truck.state = TruckState.DOCKED;
-                    if (truck.state === TruckState.LOADED) truck.state = TruckState.LEAVING;
+                    if (truck.state === ObjectState.ENTERING) truck.state = ObjectState.DOCKED;
+                    if (truck.state === ObjectState.LOADED) truck.state = ObjectState.LEAVING;
                 }
             }
 
             for (const pack of packages) {
                 this._packageView.render(pack);
-                if (pack.state === TruckState.ENTERING) pack.state = TruckState.DOCKED;
-                if (pack.state === TruckState.LOADED) pack.state = TruckState.LEAVING;
+                if (pack.state === ObjectState.ENTERING) pack.state = ObjectState.DOCKED;
+                if (pack.state === ObjectState.LOADED) pack.state = ObjectState.LEAVING;
             }
         }
     }

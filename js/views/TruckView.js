@@ -1,4 +1,4 @@
-import {TruckState} from "../modules.js";
+import {ObjectState} from "../modules.js";
 
 export default class TruckView {
     constructor(targetElementId) {
@@ -35,14 +35,14 @@ export default class TruckView {
             truckElement.appendChild(cell);
         }
 
-        if (truck.state === TruckState.ENTERING) {
+        if (truck.state === ObjectState.ENTERING) {
             truckElement.style.gridColumn = `span 1 / 1`;
             truckElement.style.animation = 'slide-in .5s';
 
             setTimeout(() => {
                 truckElement.style.gridColumn = `span ${truck.width} / ${truck.posX + 1}`;
             }, 100);
-        } else if (truck.state === TruckState.LOADED) {
+        } else if (truck.state === ObjectState.LOADED) {
             truckElement.style.gridColumn = `span ${truck.width} / ${truck.posX + 1}`;
             truckElement.style.transition = 'transform 0.3s ease-out';
             truckElement.classList.add('slide-out-right');

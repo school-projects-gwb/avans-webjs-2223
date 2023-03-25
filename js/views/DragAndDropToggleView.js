@@ -18,6 +18,7 @@ export default class DragAndDropToggleView {
         const wrapperElement = document.createElement('div');
         wrapperElement.appendChild(new BlockTitle("Drag & Drop"));
         wrapperElement.classList.add('flex-col');
+        wrapperElement.style.marginTop = '.75rem';
         wrapperElement.id = this._wrapperElementId;
 
         const buttonWrapper = document.createElement('div');
@@ -47,6 +48,6 @@ export default class DragAndDropToggleView {
         wrapperElement.appendChild(buttonWrapper);
 
         const targetElement = document.getElementById(this._targetElementId);
-        targetElement.insertBefore(wrapperElement, targetElement.firstChild);
+        targetElement.insertBefore(wrapperElement, targetElement.children[1]);
     }
 }

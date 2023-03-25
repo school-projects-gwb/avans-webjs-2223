@@ -1,4 +1,4 @@
-import { TruckState } from "../modules.js";
+import { ObjectState } from "../modules.js";
 
 export default class PackageView {
     constructor(targetElementId) {
@@ -12,14 +12,14 @@ export default class PackageView {
         packageElement.style.margin = '.5rem';
         packageElement.draggable = true;
 
-        if (pack.state === TruckState.ENTERING) {
+        if (pack.state === ObjectState.ENTERING) {
             packageElement.style.gridColumn = `span ${1} / ${pack.posX + 1}`;
             packageElement.style.animation = 'slide-in .5s';
 
             setTimeout(() => {
                 packageElement.style.gridColumn = `span ${1} / ${pack.posX + 1}`;
             }, 300);
-        } else if (pack.state === TruckState.LEAVING) {
+        } else if (pack.state === ObjectState.LEAVING) {
             packageElement.style.animation = 'slide-in .25s';
             packageElement.style.transition = '.25s';
             packageElement.style.gridColumn = `span ${1} / ${pack.posX + 1}`;

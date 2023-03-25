@@ -16,7 +16,7 @@ import ConveyorBeltDock from "./models/ConveyorBeltDock.js";
 import Truck from "./models/Truck.js";
 import TruckForm from "./models/TruckForm.js";
 import TruckType from "./models/TruckType.js";
-import TruckState from "./models/TruckState.js";
+import ObjectState from "./models/ObjectState.js";
 import PackageShape from "./models/PackageShape.js";
 import TruckObject from "./models/TruckObject.js";
 import Package from "./models/Package.js";
@@ -53,7 +53,7 @@ export {
     ConveyorBeltDock,
     TruckForm,
     TruckType,
-    TruckState,
+    ObjectState,
     PackageShape,
     Truck,
     TruckObject,

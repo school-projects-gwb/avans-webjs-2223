@@ -7,8 +7,6 @@ export default class TruckCreatorView {
         this.targetElementId = targetElementId;
         this.wrapperElementId = 'truck-creator';
         this.formWrapperElementId = 'truck-creator-form';
-        this.currentStep = 1;
-        this.formResult = {};
         this.renderBase();
     }
 
@@ -17,7 +15,7 @@ export default class TruckCreatorView {
         this.wrapperElement.appendChild(new BlockTitle("truck toevoegen"));
         
         this.wrapperElement.style.display = 'flex';
-        this.wrapperElement.style.marginTop = '2rem';
+        this.wrapperElement.style.marginTop = '.75rem';
         this.wrapperElement.style.flexDirection = 'column';
         this.wrapperElement.style.justifyContent = 'space-between';
         this.wrapperElement.id = this.wrapperElementId;

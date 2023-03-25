@@ -1,8 +1,8 @@
-const TruckState = Object.freeze({
+const ObjectState = Object.freeze({
     ENTERING: 'Entering',
     DOCKED: 'Docked',
     LOADED: 'Loaded',
     LEAVING: 'Leaving'
 });
 
-export default TruckState;
+export default ObjectState;

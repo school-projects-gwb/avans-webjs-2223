@@ -1,4 +1,4 @@
-import {ConveyorBeltDock, Package, TruckState} from "../modules.js";
+import {ConveyorBeltDock, Package, ObjectState} from "../modules.js";
 
 export default class ConveyorBelt {
     constructor(posY, startPosX, endPosX, eventEmitter) {
@@ -76,8 +76,8 @@ export default class ConveyorBelt {
         // Truck logic
         for (const truckWrapper of this._trucks) {
             for (const [index, truck] of truckWrapper.trucks.entries()) {
-                if (truck.isLoaded() && truck.state === TruckState.DOCKED) truck.state = TruckState.LOADED;
-                if (truck.state === TruckState.LEAVING) truckWrapper._trucks.splice(index, 1);
+                if (truck.isLoaded() && truck.state === ObjectState.DOCKED) truck.state = ObjectState.LOADED;
+                if (truck.state === ObjectState.LEAVING) truckWrapper._trucks.splice(index, 1);
                 truck.loadPackage();
             }
         }
@@ -101,11 +101,11 @@ export default class ConveyorBelt {
                     return truckObject.posX === pack.posX;
                 });
 
-                if (!truckObject.isLoaded() && truckObject.state === TruckState.DOCKED) {
+                if (!truckObject.isLoaded() && truckObject.state === ObjectState.DOCKED) {
                     const packageFits = truckObject.packageFits(pack);
                     if (packageFits) {
                         truckObject.addPackage(packageFits);
-                        pack.state = TruckState.LEAVING;
+                        pack.state = ObjectState.LEAVING;
                     }
 
                     this._markedPackageIndexes.push(index);
@@ -118,7 +118,7 @@ export default class ConveyorBelt {
         // check if there are any empty spots
         for (let i = 0; i < deletedIndex; i++) {
             this._packages[i].posX++;
-            this._packages[i].state = TruckState.ENTERING;
+            this._packages[i].state = ObjectState.ENTERING;
         }
 
         this._packages.unshift(new Package(this._packageCount++,1, this._posY+1));

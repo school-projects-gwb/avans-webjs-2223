@@ -1,4 +1,4 @@
-import {PackageShape, TruckState} from "../modules.js";
+import {PackageShape, ObjectState} from "../modules.js";
 
 export default class Package {
     constructor(id, posX, posY, packageShape = null) {
@@ -8,7 +8,7 @@ export default class Package {
         this._id = id;
         this._posX = posX;
         this._posY = posY;
-        this._state = TruckState.ENTERING;
+        this._state = ObjectState.ENTERING;
     }
 
     get state() {

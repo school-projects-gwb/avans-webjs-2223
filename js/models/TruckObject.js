@@ -1,4 +1,4 @@
-import {EventEmitter, Package, TruckState, PackageShape} from "../modules.js";
+import {EventEmitter, Package, ObjectState, PackageShape} from "../modules.js";
 
 export default class TruckObject {
     constructor(id, posX, posY, width, height) {
@@ -7,7 +7,7 @@ export default class TruckObject {
         this._height = height;
         this._posY = posY;
         this._posX = posX;
-        this._state = TruckState.ENTERING;
+        this._state = ObjectState.ENTERING;
         this._noFit = 0;
         this._noFitLimit = 3;
 
