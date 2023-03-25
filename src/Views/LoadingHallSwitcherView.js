@@ -1,31 +1,28 @@
-import {LoadingHall, ButtonLink, BlockTitle, DOM} from '../../modules.js';
+import {LoadingHall, ButtonLink, BlockTitle, DOM} from '../modules.js';
 
 export default class LoadingHallSwitcherView {
     constructor(callbackFunction, loadingHalls, targetElementId) {
-        this.targetElementId = targetElementId;
-        this.callbackFunction = callbackFunction;
-        this.loadingHalls = loadingHalls;
-        this.wrapperElementId = 'loading-hall-switcher';
+        this._targetElementId = targetElementId;
+        this._callbackFunction = callbackFunction;
+        this._loadingHalls = loadingHalls;
+        this._wrapperElementId = 'loading-hall-switcher';
         this.render();
     }
 
     render() {
-        const existsCheck = DOM.getById(this.wrapperElementId);
-        if (existsCheck) {
-            existsCheck.remove();
-        }
+        DOM.deleteIfExists(this._wrapperElementId);
 
         const wrapperElement = DOM.create('div');
         wrapperElement.appendChild(new BlockTitle("Laadhallen"));
         wrapperElement.classList.add('flex-col');
-        wrapperElement.id = this.wrapperElementId;
+        wrapperElement.id = this._wrapperElementId;
 
         const loadingHallWrapper = DOM.create('div');
         loadingHallWrapper.style.display = 'flex';
         loadingHallWrapper.style.justifyContent = 'space-between';
 
-        for (const loadingHall of this.loadingHalls) {
-            const hallElement = new ButtonLink(loadingHall.getIsActive(), loadingHall.name, loadingHall.id, this.callbackFunction);
+        for (const loadingHall of this._loadingHalls) {
+            const hallElement = new ButtonLink(loadingHall.getIsActive(), loadingHall.name, loadingHall.id, this._callbackFunction);
             hallElement.style.margin = '.25rem';
             hallElement.style.width = '50%';
             loadingHallWrapper.appendChild(hallElement);
@@ -33,7 +30,7 @@ export default class LoadingHallSwitcherView {
 
         wrapperElement.appendChild(loadingHallWrapper);
 
-        const targetElement = DOM.getById(this.targetElementId);
+        const targetElement = DOM.getById(this._targetElementId);
         targetElement.insertBefore(wrapperElement, targetElement.firstChild);
     }
 }

@@ -23,8 +23,7 @@ import TruckObject from "./Models/TruckObject.js";
 import Package from "./Models/Package.js";
 
 // Views
-import LoadingHallView from "./Views/LoadingHall/LoadingHallView.js";
-import LoadingHallSwitcherView from "./Views/LoadingHall/LoadingHallSwitcherView.js";
+import LoadingHallSwitcherView from "./Views/LoadingHallSwitcherView.js";
 import ConveyorBeltView from "./Views/ConveyorBeltView.js";
 import TruckView from "./Views/Truck/TruckView.js";
 import TruckCreatorView from "./Views/Truck/TruckCreatorView.js";
@@ -64,7 +63,6 @@ export {
     Package,
 
     // Views
-    LoadingHallView,
     LoadingHallSwitcherView,
     ConveyorBeltView,
     TruckView,

@@ -2,35 +2,34 @@ import { BlockTitle, ButtonLink, TextInput, DOM, TruckType, SelectInput } from '
 
 export default class TruckCreatorView {
     constructor(callbackFunction, targetElementId, truckForm) {
-        this.callbackFunction = callbackFunction;
-        this.truckForm = truckForm;
-        this.targetElementId = targetElementId;
-        this.wrapperElementId = 'truck-creator';
-        this.formWrapperElementId = 'truck-creator-form';
+        this._callbackFunction = callbackFunction;
+        this._truckForm = truckForm;
+        this._targetElementId = targetElementId;
+        this._wrapperElementId = 'truck-creator';
+        this._formWrapperElementId = 'truck-creator-form';
         this.renderBase();
     }
 
     renderBase() {
-        this.wrapperElement = DOM.create('div');
-        this.wrapperElement.appendChild(new BlockTitle("truck toevoegen"));
+        this._wrapperElement = DOM.create('div');
+        this._wrapperElement.appendChild(new BlockTitle("truck toevoegen"));
         
-        this.wrapperElement.style.display = 'flex';
-        this.wrapperElement.style.marginTop = '.75rem';
-        this.wrapperElement.style.flexDirection = 'column';
-        this.wrapperElement.style.justifyContent = 'space-between';
-        this.wrapperElement.id = this.wrapperElementId;
+        this._wrapperElement.style.display = 'flex';
+        this._wrapperElement.style.marginTop = '.75rem';
+        this._wrapperElement.style.flexDirection = 'column';
+        this._wrapperElement.style.justifyContent = 'space-between';
+        this._wrapperElement.id = this._wrapperElementId;
         
-        DOM.getById(this.targetElementId).appendChild(this.wrapperElement);
+        DOM.getById(this._targetElementId).appendChild(this._wrapperElement);
 
         this.renderStep(1);
     }
 
     renderStep(step) {
-        const existsCheck = DOM.getById(this.formWrapperElementId);
-        if (existsCheck) existsCheck.remove();
+        DOM.deleteIfExists(this._formWrapperElementId);
 
         const formWrapper = DOM.create('div');
-        formWrapper.id = this.formWrapperElementId;
+        formWrapper.id = this._formWrapperElementId;
         formWrapper.style.display = 'grid';
         formWrapper.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
         formWrapper.style.alignItems = 'center';
@@ -56,7 +55,7 @@ export default class TruckCreatorView {
                 break;
         }
 
-        this.wrapperElement.appendChild(formWrapper);
+        this._wrapperElement.appendChild(formWrapper);
     }
 
     renderErrors(validationResult) {
@@ -72,19 +71,19 @@ export default class TruckCreatorView {
 
         switch (step) {
             case 1:
-                validationResult = this.truckForm.validateFields({ 'width': DOM.getById('width').value, 'height': DOM.getById('height').value });
+                validationResult = this._truckForm.validateFields({ 'width': DOM.getById('width').value, 'height': DOM.getById('height').value });
                 break;
             case 2:
-                validationResult = this.truckForm.validateFields({'type': DOM.getById('type').value});
+                validationResult = this._truckForm.validateFields({'type': DOM.getById('type').value});
                 break;
             case 3:
-                validationResult = this.truckForm.validateFields({'interval': DOM.getById('interval').value});
+                validationResult = this._truckForm.validateFields({'interval': DOM.getById('interval').value});
                 break;
         }
 
-        if (Object.keys(validationResult) == 0) {
-            if (step == 3) {
-                this.callbackFunction(this.truckForm);
+        if (Object.keys(validationResult) === 0) {
+            if (step === 3) {
+                this._callbackFunction(this._truckForm);
                 this.renderStep(1);
             } else {
                 this.renderStep(++step);

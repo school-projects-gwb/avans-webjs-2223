@@ -6,4 +6,11 @@ export default class DOM {
     static getById(id) {
         return document.getElementById(id);
     }
+
+    static deleteIfExists(id) {
+        const existsCheck = DOM.getById(id);
+        if (existsCheck) {
+            existsCheck.remove();
+        }
+    }
 }

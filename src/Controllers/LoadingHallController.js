@@ -1,6 +1,5 @@
 import {
     LoadingHall,
-    LoadingHallView,
     LoadingHallSwitcherView,
     ConveyorBeltController,
     TruckController,
@@ -32,7 +31,6 @@ export default class LoadingHallController {
     }
 
     render() {
-        this._loadingHallView = new LoadingHallView('section-right');
         this._loadingHallSwitcherView = new LoadingHallSwitcherView(this.switchLoadingHall.bind(this), this._terrain.loadingHalls, 'section-left');
         this._conveyorBeltController.setConveyorBelts();
 

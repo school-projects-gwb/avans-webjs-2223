@@ -10,10 +10,7 @@ export default class DragAndDropToggleView {
     }
 
     render() {
-        const existsCheck = DOM.getById(this._wrapperElementId);
-        if (existsCheck) {
-            existsCheck.remove();
-        }
+        DOM.deleteIfExists(this._wrapperElementId);
 
         const wrapperElement = DOM.create('div');
         wrapperElement.appendChild(new BlockTitle("Drag & Drop"));

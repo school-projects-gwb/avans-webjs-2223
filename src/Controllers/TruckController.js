@@ -1,4 +1,4 @@
-import { Terrain, Truck, TruckCreatorView, TruckForm } from '../modules.js';
+import {Truck, TruckCreatorView, TruckForm, TruckOverviewView} from '../modules.js';
 
 export default class TruckController {
     /**
@@ -18,7 +18,12 @@ export default class TruckController {
     }
 
     render() {
-        this.truckCreatorView = new TruckCreatorView(this.createTruck.bind(this), this._targetElementId, new TruckForm);
+        this._truckOverviewView = new TruckOverviewView(this.deleteTruck.bind(this), this._targetElementId, this._terrain.activeLoadingHall.getTrucks());
+        this._truckCreatorView = new TruckCreatorView(this.createTruck.bind(this), this._targetElementId, new TruckForm);
+    }
+
+    deleteTruck(truckId) {
+
     }
 
     createTruck(truckForm) {
@@ -31,6 +36,7 @@ export default class TruckController {
             truckForm.getProperty('type')
             );
 
+        this._truckOverviewView.render();
         this._terrain.activeLoadingHall.addTruck(truck);
     }
 }

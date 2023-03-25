@@ -32,6 +32,17 @@ export default class LoadingHall {
         beltChoice.addTruck(truck);
     }
 
+    getTrucks() {
+        const trucks = [];
+        for (const belt of this._conveyorBelts) {
+            for (const truck of belt.trucks) {
+                trucks.push(truck);
+            }
+        }
+
+        return trucks;
+    }
+
     calculateAverageTrucksPerBelt() {
         const truckCount = this._conveyorBelts.reduce((total, conveyorBelt) => total + conveyorBelt.truckCount, 0);
         return Math.ceil(truckCount / this._conveyorBelts.length);
