@@ -81,7 +81,7 @@ export default class TruckCreatorView {
                 break;
         }
 
-        if (Object.keys(validationResult) === 0) {
+        if (Object.keys(validationResult) == 0) {
             if (step === 3) {
                 this._callbackFunction(this._truckForm);
                 this.renderStep(1);

@@ -20,11 +20,12 @@ export default class TruckController {
     }
 
     render() {
-        this._truckOverviewView = new TruckOverviewView(this.deleteTruck.bind(this), this._targetElementId, this._terrain.activeLoadingHall.getTrucks());
+        this._truckOverviewView = new TruckOverviewView(this.removeTruck.bind(this), this._targetElementId, this._terrain.activeLoadingHall.getTrucks());
     }
 
-    deleteTruck(truckId) {
-        console.log(truckId);
+    removeTruck(truckId) {
+        this._terrain.activeLoadingHall.removeTruck(truckId);
+        this.render();
     }
 
     createTruck(truckForm) {
@@ -37,7 +38,7 @@ export default class TruckController {
             truckForm.getProperty('type')
             );
 
-        this._truckOverviewView.render();
         this._terrain.activeLoadingHall.addTruck(truck);
+        this.render();
     }
 }

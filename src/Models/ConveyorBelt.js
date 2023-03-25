@@ -4,7 +4,6 @@ export default class ConveyorBelt {
     constructor(posY, startPosX, endPosX, eventEmitter) {
         this._posY = posY;
         this._trucks = [];
-        this._startPosX = startPosX;
         this._packageCount = 12;
         this._packages = [];
         this._markedPackageIndexes = [];
@@ -59,7 +58,18 @@ export default class ConveyorBelt {
     addTruck(truck) {
         truck.posY = this._posY;
         this._trucks.push(truck);
-    } 
+    }
+
+    removeTruck(id) {
+        const index = this.trucks.findIndex(truck => truck.id === id);
+        if (index !== -1) {
+            const truck = this.trucks[index];
+            this.trucks.splice(index, 1);
+            return true;
+        }
+
+        return false;
+    }
 
     get truckCount() {
         return this._trucks.length;
@@ -67,6 +77,7 @@ export default class ConveyorBelt {
 
     handlePackageLoading() {
         // Truck generation
+
         for (const truckWrapper of this._trucks) {
             const availableDock = this.getFirstAvailableDock(1);
             if (!availableDock) break;

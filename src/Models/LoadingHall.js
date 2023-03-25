@@ -32,21 +32,26 @@ export default class LoadingHall {
     }
     
     addTruck(truck) {
+        if (this.getTrucks().length === this._conveyorBelts.length * 3) return;
         const avgTrucksPerBelt = this.calculateAverageTrucksPerBelt();
         const beltsWithFewestTrucks = this._conveyorBelts.filter(belt => belt.truckCount === avgTrucksPerBelt - 1 || belt.truckCount === avgTrucksPerBelt);
         const beltChoice = beltsWithFewestTrucks[Math.floor(Math.random() * beltsWithFewestTrucks.length)];
         beltChoice.addTruck(truck);
     }
 
-    getTrucks() {
-        const trucks = [];
+    removeTruck(truckId) {
+        if (this.getTrucks().length === 1) return;
+
         for (const belt of this._conveyorBelts) {
-            for (const truck of belt.trucks) {
-                trucks.push(truck);
-            }
+            const removedTruck = belt.removeTruck(truckId);
+            if (removedTruck) return true;
         }
 
-        return trucks;
+        return false;
+    }
+
+    getTrucks() {
+        return this._conveyorBelts.flatMap(belt => belt.trucks);
     }
 
     calculateAverageTrucksPerBelt() {
