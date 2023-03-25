@@ -11,6 +11,7 @@ export default class TruckCreatorView {
     }
 
     renderBase() {
+        DOM.deleteIfExists(this._wrapperElementId);
         this._wrapperElement = DOM.create('div');
         this._wrapperElement.appendChild(new BlockTitle("truck toevoegen"));
         
@@ -27,7 +28,6 @@ export default class TruckCreatorView {
 
     renderStep(step) {
         DOM.deleteIfExists(this._formWrapperElementId);
-
         const formWrapper = DOM.create('div');
         formWrapper.id = this._formWrapperElementId;
         formWrapper.style.display = 'grid';

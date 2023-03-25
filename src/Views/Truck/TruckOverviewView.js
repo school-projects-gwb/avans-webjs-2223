@@ -1,10 +1,11 @@
 import {BlockTitle, DOM} from "../../modules.js";
 
 export default class TruckOverviewView {
-    constructor(callbackFunction, targetElementId, trucks) {
+    constructor(callbackFunction, targetElementId, trucks, minimumTruckLimit) {
         this._callbackFunction = callbackFunction;
         this._targetElementId = targetElementId;
         this._wrapperElementId = 'truck-overview';
+        this._minimumTruckLimit = minimumTruckLimit;
         this._trucks = trucks;
         this.render();
     }
@@ -32,20 +33,22 @@ export default class TruckOverviewView {
                 Grootte <b>${truck.width}x${truck.height}m</b>
             `;
 
-            const deleteButton = DOM.create('a');
-            deleteButton.innerHTML = 'X';
-            deleteButton.classList.add('rounded-xl', 'bg-accent');
-            deleteButton.style.padding = '.1rem .5rem .1rem .5rem';
-            deleteButton.style.cursor = 'pointer';
-            deleteButton.style.color = 'white';
-            deleteButton.style.fontWeight = 'bold';
-            deleteButton.style.marginRight = '.25rem';
-            deleteButton.style.float = 'right';
-            deleteButton.addEventListener('click', e => {
-                this._callbackFunction(truck.id)
-            });
+            if (!this._minimumTruckLimit) {
+                const deleteButton = DOM.create('a');
+                deleteButton.innerHTML = 'X';
+                deleteButton.classList.add('rounded-xl', 'bg-accent');
+                deleteButton.style.padding = '.1rem .5rem .1rem .5rem';
+                deleteButton.style.cursor = 'pointer';
+                deleteButton.style.color = 'white';
+                deleteButton.style.fontWeight = 'bold';
+                deleteButton.style.marginRight = '.25rem';
+                deleteButton.style.float = 'right';
+                deleteButton.addEventListener('click', e => {
+                    this._callbackFunction(truck.id)
+                });
 
-            truckWrapper.appendChild(deleteButton);
+                truckWrapper.appendChild(deleteButton);
+            }
 
             wrapperElement.appendChild(truckWrapper);
         }

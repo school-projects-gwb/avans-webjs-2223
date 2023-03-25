@@ -32,7 +32,7 @@ export default class LoadingHall {
     }
     
     addTruck(truck) {
-        if (this.getTrucks().length === this._conveyorBelts.length * 3) return;
+        if (this.isMaximumTruckLimit()) return;
         const avgTrucksPerBelt = this.calculateAverageTrucksPerBelt();
         const beltsWithFewestTrucks = this._conveyorBelts.filter(belt => belt.truckCount === avgTrucksPerBelt - 1 || belt.truckCount === avgTrucksPerBelt);
         const beltChoice = beltsWithFewestTrucks[Math.floor(Math.random() * beltsWithFewestTrucks.length)];
@@ -40,7 +40,7 @@ export default class LoadingHall {
     }
 
     removeTruck(truckId) {
-        if (this.getTrucks().length === 1) return;
+        if (this.isMinimumTruckLimit()) return;
 
         for (const belt of this._conveyorBelts) {
             const removedTruck = belt.removeTruck(truckId);
@@ -48,6 +48,14 @@ export default class LoadingHall {
         }
 
         return false;
+    }
+
+    isMinimumTruckLimit() {
+        return this.getTrucks().length === 1
+    }
+
+    isMaximumTruckLimit() {
+        return this.getTrucks().length === this._conveyorBelts.length * 3
     }
 
     getTrucks() {
