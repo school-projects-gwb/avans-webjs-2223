@@ -1,7 +1,7 @@
 export default class WeatherHelper {
     constructor() {
         this.apiKey = 'c06c817ec00a4123b54145914232803';
-        this.currentCity = 'Barcelona';
+        this.currentCity = 'Amsterdam';
         this.weatherData = {};
     }
 
@@ -19,14 +19,9 @@ export default class WeatherHelper {
         };
     }
 
-    async getWeatherData(city = "Amsterdam") {
-        this.currentCity = city;
-        await this.fetchWeatherData();
-        return this.weatherData;
-    }
-
     async updateWeatherData() {
         await this.fetchWeatherData();
+        console.log(this.weatherData);
     }
 
 }

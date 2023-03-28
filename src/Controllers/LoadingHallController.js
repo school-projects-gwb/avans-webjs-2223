@@ -3,7 +3,7 @@ import {
     LoadingHallSwitcherView,
     ConveyorBeltController,
     TruckController,
-    DragAndDropController, EventEmitter, WeatherHelper
+    DragAndDropController, EventEmitter, WeatherHelper, LocationInputView
 } from '../modules.js';
 import AddOrRemovveConveyorBeltView from '../Views/AddOrRemoveConveyorBeltView.js';
 
@@ -21,10 +21,10 @@ export default class LoadingHallController {
         this.initiateLoadingHalls();
 
         this._conveyorBeltController = new ConveyorBeltController(terrain, 'section-right', this._eventEmitter);
+        this._locationInputView = new LocationInputView(this.handleLocationInput.bind(this), 'section-left');
         this.render();
         this._truckController = new TruckController(terrain, 'section-left');
         this._dragAndDropController = new DragAndDropController(this._eventEmitter, 'section-left');
-        this.handleDriveStatus();
 
         this._eventEmitter.on("dragAndDrop", (data) => {
             if (data.enabled) {
@@ -39,7 +39,9 @@ export default class LoadingHallController {
         this._loadingHallSwitcherView = new LoadingHallSwitcherView(this.switchLoadingHall.bind(this), this._terrain.loadingHalls, 'section-left');
         this._conveyorBeltController.setConveyorBelts();
         this._addOrRemoveConveorBelt = new AddOrRemovveConveyorBeltView(this._conveyorBeltController.updateConveyorBelt.bind(this._conveyorBeltController), 'section-left');
+        
         clearInterval(this._renderInterval);
+
         
         this._renderInterval = setInterval(() => {
             this._conveyorBeltController.render();
@@ -70,6 +72,11 @@ export default class LoadingHallController {
         this.render();
         this._truckController.render();
         this._eventEmitter.emit('loadingHallSwitched', {});
+    }
+
+    handleLocationInput(city){
+        this._weatherHelper.currentCity = city;
+        this.handleDriveStatus();
     }
 
     handleDriveStatus(){

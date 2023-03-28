@@ -39,7 +39,7 @@ export default class Truck {
                 this.canDrive = !weatherData.isWindy;
                 break;
             case TruckType.FRAGILE :
-                this.canDrive = !weatherData.isRaining || !weatherData.isSnowing;
+                this.canDrive = !weatherData.isRaining ?? !weatherData.isSnowing;
                 break;
         }    
     }
