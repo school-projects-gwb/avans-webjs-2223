@@ -21,7 +21,5 @@ export default class WeatherHelper {
 
     async updateWeatherData() {
         await this.fetchWeatherData();
-        console.log(this.weatherData);
     }
-
 }
