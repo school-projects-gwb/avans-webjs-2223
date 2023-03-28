@@ -3,7 +3,7 @@ import {
     LoadingHallSwitcherView,
     ConveyorBeltController,
     TruckController,
-    DragAndDropController, EventEmitter
+    DragAndDropController, EventEmitter, WeatherHelper
 } from '../modules.js';
 import AddOrRemovveConveyorBeltView from '../Views/AddOrRemoveConveyorBeltView.js';
 
@@ -12,15 +12,19 @@ export default class LoadingHallController {
      * @param { Terrain } terrain 
      */
     constructor(terrain) {
+        this._weatherHelper = new WeatherHelper();
+        // this._weatherHelper.getWeatherData("Paris").then((data) => {
+        //     console.log(data);
+        // });
         this._terrain = terrain;
         this._eventEmitter = EventEmitter;
         this.initiateLoadingHalls();
 
         this._conveyorBeltController = new ConveyorBeltController(terrain, 'section-right', this._eventEmitter);
         this.render();
-        
         this._truckController = new TruckController(terrain, 'section-left');
         this._dragAndDropController = new DragAndDropController(this._eventEmitter, 'section-left');
+        this.handleDriveStatus();
 
         this._eventEmitter.on("dragAndDrop", (data) => {
             if (data.enabled) {
@@ -36,10 +40,15 @@ export default class LoadingHallController {
         this._conveyorBeltController.setConveyorBelts();
         this._addOrRemoveConveorBelt = new AddOrRemovveConveyorBeltView(this._conveyorBeltController.updateConveyorBelt.bind(this._conveyorBeltController), 'section-left');
         clearInterval(this._renderInterval);
-
+        
         this._renderInterval = setInterval(() => {
             this._conveyorBeltController.render();
+            
         }, 500);
+
+        setInterval(() => {
+            this.handleDriveStatus();
+        }, 60000 * 5 ); // 5 minutes
     }
 
     initiateLoadingHalls() {
@@ -61,5 +70,17 @@ export default class LoadingHallController {
         this.render();
         this._truckController.render();
         this._eventEmitter.emit('loadingHallSwitched', {});
+    }
+
+    handleDriveStatus(){
+        const loadingHalls = this._terrain._loadingHalls;
+        this._weatherHelper.updateWeatherData().then(() => {
+            loadingHalls.forEach(hall => {
+                const trucks = hall.getTrucks();
+                trucks.forEach(truck => {
+                    truck.updateDriveStatus(this._weatherHelper.weatherData)
+                });
+            });
+        });
     }
 }

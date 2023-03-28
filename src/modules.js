@@ -41,6 +41,7 @@ import SelectInput from "./Views/Components/SelectInput.js";
 
 // Helper modules
 import EventEmitter from "./Helpers/EventEmitter.js";
+import WeatherHelper from "./Helpers/WeatherHelper.js";
 
 export {
     // Controllers
@@ -81,5 +82,6 @@ export {
     SelectInput,
 
     // Helper modules
-    EventEmitter
+    EventEmitter,
+    WeatherHelper
 }

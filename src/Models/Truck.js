@@ -1,4 +1,4 @@
-import {TruckObject} from "../modules.js";
+import {TruckObject, TruckType} from "../modules.js";
 
 export default class Truck {
     /**
@@ -16,6 +16,7 @@ export default class Truck {
         this._type = type;
         this._trucks = [];
         this._posY = -1;
+        this.canDrive = true;
     }
 
     get canCreate() {
@@ -27,6 +28,20 @@ export default class Truck {
         const newTruck = new TruckObject(Math.floor(Math.random() * 10000), posX, this._posY, this._width, this._height);
         newTruck.isDocked = true;
         this._trucks.push(newTruck);
+    }
+
+    updateDriveStatus(weatherData) {
+        switch (this._type) {
+            case TruckType.COLD :
+                this.canDrive = weatherData.temperature <= 5;
+                break;
+            case TruckType.PALLET :
+                this.canDrive = !weatherData.isWindy;
+                break;
+            case TruckType.FRAGILE :
+                this.canDrive = !weatherData.isRaining || !weatherData.isSnowing;
+                break;
+        }    
     }
 
     get posY() {

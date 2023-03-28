@@ -88,7 +88,7 @@ export default class ConveyorBelt {
         for (const truckWrapper of this._trucks) {
             const availableDock = this.getFirstAvailableDock(1);
             if (!availableDock) break;
-            if (truckWrapper.canCreate) truckWrapper.create(availableDock.posX);
+            if (truckWrapper.canCreate && truckWrapper.canDrive) truckWrapper.create(availableDock.posX);
         }
 
         // Truck logic
