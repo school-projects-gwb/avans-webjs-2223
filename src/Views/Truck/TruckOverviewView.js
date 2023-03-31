@@ -25,11 +25,10 @@ export default class TruckOverviewView {
 
         for (const truck of this._trucks) {
             const truckWrapper = DOM.create('div');
-            truckWrapper.style.background = 'lightgray';
             truckWrapper.style.padding = '.5rem';
             truckWrapper.style.margin = '.5rem 0 .5rem 0';
             truckWrapper.style.fontSize = '.9rem';
-            truckWrapper.classList.add('rounded-xl');
+            truckWrapper.classList.add('rounded-xl', truck.canDrive ? 'success' : 'error');
 
             truckWrapper.innerHTML = `
                 ${truck.type}

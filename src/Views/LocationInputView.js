@@ -8,7 +8,7 @@ export default class LocationInputView {
         this._wrapperElementId = 'location-input';
         this._formWrapperElementId = 'location-input-form';
         this._lastCity = "'s-Hertogenbosch";
-        this.render(); 
+        this.render();
         this.handleLocationInput();
     }
 

@@ -21,7 +21,6 @@ export default class LoadingHallController {
         this.initiateLoadingHalls();
 
         this._conveyorBeltController = new ConveyorBeltController(terrain, 'section-right', this._eventEmitter);
-        this._locationInputView = new LocationInputView(this.handleLocationInput.bind(this), 'section-left');
         this.render();
         this._truckController = new TruckController(terrain, 'section-left');
         this._dragAndDropController = new DragAndDropController(this._eventEmitter, 'section-left');
@@ -39,7 +38,8 @@ export default class LoadingHallController {
         this._loadingHallSwitcherView = new LoadingHallSwitcherView(this.switchLoadingHall.bind(this), this._terrain.loadingHalls, 'section-left');
         this._conveyorBeltController.setConveyorBelts();
         this._addOrRemoveConveorBelt = new AddOrRemovveConveyorBeltView(this._conveyorBeltController.updateConveyorBelt.bind(this._conveyorBeltController), 'section-left');
-        
+        this._locationInputView = new LocationInputView(this.handleLocationInput.bind(this), 'section-left');
+
         clearInterval(this._renderInterval);
 
         

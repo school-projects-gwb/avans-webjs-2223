@@ -35,8 +35,9 @@ export default class TruckCreatorView {
             warning.style.color = 'red';
             this._wrapperElement.appendChild(warning);
         }
-        
-        DOM.getById(this._targetElementId).appendChild(this._wrapperElement);
+
+        DOM.getById(this._targetElementId).insertBefore(this._wrapperElement, DOM.getById(this._targetElementId).lastChild);
+        // DOM.getById(this._targetElementId).appendChild(this._wrapperElement);
 
         if (!this._maximumTruckLimit) this.renderStep(1);
     }
@@ -70,7 +71,6 @@ export default class TruckCreatorView {
         }
 
         this._wrapperElement.appendChild(formWrapper);
-        console.log(this._wrapperElement)
     }
 
     renderErrors(validationResult) {

@@ -16,7 +16,7 @@ export default class Truck {
         this._type = type;
         this._trucks = [];
         this._posY = -1;
-        this.canDrive = true;
+        this._canDrive = true;
     }
 
     get canCreate() {
@@ -33,13 +33,13 @@ export default class Truck {
     updateDriveStatus(weatherData) {
         switch (this._type) {
             case TruckType.COLD :
-                this.canDrive = weatherData.temperature <= 5;
+                this._canDrive = weatherData.temperature <= 35;
                 break;
             case TruckType.PALLET :
-                this.canDrive = !weatherData.isWindy;
+                this._canDrive = !weatherData.isWindy;
                 break;
             case TruckType.FRAGILE :
-                this.canDrive = !weatherData.isRaining ?? !weatherData.isSnowing;
+                this._canDrive = !weatherData.isRaining ?? !weatherData.isSnowing;
                 break;
         }    
     }
@@ -50,6 +50,10 @@ export default class Truck {
 
     get width() {
         return this._width;
+    }
+
+    get canDrive() {
+        return this._canDrive;
     }
 
     get height() {
