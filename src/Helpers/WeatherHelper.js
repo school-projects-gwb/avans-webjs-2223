@@ -7,16 +7,21 @@ export default class WeatherHelper {
 
     async fetchWeatherData() {
         const url = `https://api.weatherapi.com/v1/current.json?key=${this.apiKey}&q=${this.currentCity}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        const { current: { wind_kph, precip_mm, snow_mm, temp_c } } = data;
+        const response = await fetch(url).then(res => {
+            return res.json();
+        });
+
+        if (response.error) return;
+
+        const {current: {wind_kph, precip_mm, snow_mm, temp_c}} = response;
 
         this.weatherData = {
-          isWindy: wind_kph > 25,
-          isRaining: precip_mm > 0,
-          isSnowing: snow_mm > 0,
-          temperature: temp_c
+            isWindy: wind_kph > 25,
+            isRaining: precip_mm > 0,
+            isSnowing: snow_mm > 0,
+            temperature: temp_c
         };
+
     }
 
     async updateWeatherData() {
