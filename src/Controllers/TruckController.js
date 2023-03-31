@@ -1,4 +1,4 @@
-import {Truck, TruckCreatorView, TruckForm, TruckOverviewView, TruckType} from '../modules.js';
+import {EventEmitter, Truck, TruckCreatorView, TruckForm, TruckOverviewView, TruckType} from '../modules.js';
 
 export default class TruckController {
     /**
@@ -15,6 +15,11 @@ export default class TruckController {
         this._terrain.loadingHalls[1].addTruck(new Truck(6, 3, 3, TruckType.PALLET));
 
         this.render();
+
+        EventEmitter.on('conveyorBeltUpdated', e => {
+            console.log('hi');
+           this.render();
+        });
     }
 
     render() {

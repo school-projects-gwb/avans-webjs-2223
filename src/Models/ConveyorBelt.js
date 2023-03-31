@@ -6,9 +6,8 @@ export default class ConveyorBelt {
      * @param { int } posY
      * @param { int } startPosX
      * @param { int } endPosX
-     * @param { EventEmitter } eventEmitter
      */
-    constructor(posY, startPosX, endPosX, eventEmitter) {
+    constructor(posY, startPosX, endPosX) {
         this._posY = posY;
         this._trucks = [];
         this._packageCount = 12;
@@ -19,9 +18,8 @@ export default class ConveyorBelt {
         }
         this._endPosX = endPosX;
         this.setDocks();
-        this._eventEmitter = eventEmitter;
 
-        this._eventEmitter.on("dragAndDrop", (data) => {
+        EventEmitter.on("dragAndDrop", (data) => {
             if (data.enabled) {
                 for (const truckWrapper of this._trucks) {
                     for (const [index, truck] of truckWrapper.trucks.entries()) {

@@ -4,10 +4,8 @@ export default class ConveyorBeltController {
     /**
      * @param { Terrain } terrain
      * @param { string } targetElementId
-     * @param { EventEmitter } eventEmitter
      */
-    constructor(terrain, targetElementId, eventEmitter) {
-        this._eventEmitter = eventEmitter;
+    constructor(terrain, targetElementId) {
         this._terrain = terrain;
         this._trucks = terrain.trucks;
         this._targetElementId = targetElementId;
@@ -76,6 +74,8 @@ export default class ConveyorBeltController {
         } else if (addConveyorBelt === '0' && conveyorBeltAmount > 1) {
           this._terrain.activeLoadingHall.conveyorBelts.pop();
         }
+
         this.setConveyorBelts();
+        EventEmitter.emit('conveyorBeltUpdated', { });
       }   
 }

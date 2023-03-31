@@ -35,6 +35,7 @@ export default class LoadingHall {
         const avgTrucksPerBelt = this.calculateAverageTrucksPerBelt();
         const beltsWithFewestTrucks = this._conveyorBelts.filter(belt => belt.truckCount === avgTrucksPerBelt - 1 || belt.truckCount === avgTrucksPerBelt);
         const beltChoice = beltsWithFewestTrucks[Math.floor(Math.random() * beltsWithFewestTrucks.length)];
+        console.log(beltChoice);
         beltChoice.addTruck(truck);
     }
 

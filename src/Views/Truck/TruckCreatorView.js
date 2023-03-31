@@ -37,7 +37,6 @@ export default class TruckCreatorView {
         }
 
         DOM.getById(this._targetElementId).insertBefore(this._wrapperElement, DOM.getById(this._targetElementId).lastChild);
-        // DOM.getById(this._targetElementId).appendChild(this._wrapperElement);
 
         if (!this._maximumTruckLimit) this.renderStep(1);
     }
@@ -96,9 +95,8 @@ export default class TruckCreatorView {
                 break;
         }
 
-        DOM.deleteIfExists(this._formWrapperElementId);
-
-        if (Object.keys(validationResult) == 0) {
+        if (Object.keys(validationResult).length == 0) {
+            DOM.deleteIfExists(this._formWrapperElementId);
             if (step === 3) {
                 this._callbackFunction(this._truckForm);
                 this.renderStep(1);

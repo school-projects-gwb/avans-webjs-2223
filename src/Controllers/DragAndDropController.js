@@ -1,15 +1,11 @@
 import {DragAndDropToggleView, EventEmitter} from "../modules.js";
 
 export default class DragAndDropController {
-
     /**
-     * @param {EventEmitter} eventEmitter
      * @param { string } targetElementId
      */
-    constructor(eventEmitter, targetElementId) {
-        this._eventEmitter = eventEmitter;
+    constructor(targetElementId) {
         this._targetElementId = targetElementId;
-
         this._isDragAndDrop = false;
         this._dragTarget = null;
 
@@ -39,7 +35,7 @@ export default class DragAndDropController {
 
         this._isDragAndDrop = toggleOn;
 
-        this._eventEmitter.emit('dragAndDrop', { enabled: this._isDragAndDrop });
+        EventEmitter.emit('dragAndDrop', { enabled: this._isDragAndDrop });
 
         this.render();
 
