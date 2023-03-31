@@ -6,10 +6,23 @@ export default class LocationInputView {
         this._targetElementId = targetElementId;
         this._callbackFunction = callbackFunction;
         this._wrapperElementId = 'location-input';
-        this._formWrapperElementId = 'location-input-form';
+        this._weatherDataElementId = 'weather-data';
         this._lastCity = "'s-Hertogenbosch";
         this.render();
         this.handleLocationInput();
+    }
+
+    setWeatherData(weatherData) {
+        if (DOM.getById(this._weatherDataElementId) == null) return;
+        const el = DOM.getById(this._weatherDataElementId);
+        const wrapperElement = DOM.getById(this._wrapperElementId);
+        el.innerHTML = `<b>
+            ${weatherData.temperature}c, 
+            ${weatherData.isRaining ? ' [Rainy]' : ''}
+            ${weatherData.isSnowing ? '[Snowing]' : ''}
+            ${weatherData.isWindy ? '[Windy]' : ''}
+            </b>`;
+        wrapperElement.appendChild(el);
     }
 
     render() {
@@ -20,7 +33,10 @@ export default class LocationInputView {
         wrapperElement.style.marginTop = '.75rem';
         wrapperElement.id = this._wrapperElementId;
 
-        wrapperElement.appendChild(new TextInput("city", "Welke stad?"));  
+        wrapperElement.appendChild(new TextInput("city", "Welke stad?"));
+        const weatherElement = document.createElement('div');
+        weatherElement.id = this._weatherDataElementId;
+        wrapperElement.appendChild(weatherElement);
         wrapperElement.appendChild(new ButtonLink(true, "Toepassen", 1, this.handleLocationInput.bind(this)));
         DOM.getById(this._targetElementId).appendChild(wrapperElement);
         DOM.getById('city').value = this._lastCity;

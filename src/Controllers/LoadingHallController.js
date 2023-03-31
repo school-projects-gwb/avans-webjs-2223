@@ -24,6 +24,8 @@ export default class LoadingHallController {
         EventEmitter.on("dragAndDrop", (data) => {
             data.enabled ? clearInterval(this._renderInterval) : this.render();
         });
+
+        this.handleLocationInput('Eindhoven');
     }
 
     render() {
@@ -33,7 +35,6 @@ export default class LoadingHallController {
         this._locationInputView = new LocationInputView(this.handleLocationInput.bind(this), 'section-left');
 
         clearInterval(this._renderInterval);
-
         
         this._renderInterval = setInterval(() => {
             this._conveyorBeltController.render();
@@ -78,6 +79,7 @@ export default class LoadingHallController {
                 trucks.forEach(truck => {
                     truck.updateDriveStatus(this._weatherHelper.weatherData)
                 });
+                this._locationInputView.setWeatherData(this._weatherHelper.weatherData);
             });
         });
     }

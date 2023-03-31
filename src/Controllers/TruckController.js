@@ -17,8 +17,7 @@ export default class TruckController {
         this.render();
 
         EventEmitter.on('conveyorBeltUpdated', e => {
-            console.log('hi');
-           this.render();
+            this.render();
         });
     }
 
