@@ -22,8 +22,8 @@ main {
 }
 
 #section-left {
-    width: 25%;
-    min-height: 100%;
+    width: calc(25% - 2rem);
+    min-height: 100vh;
     padding: 1rem;
     z-index: 2;
     background: var(--color-accent-bg);
