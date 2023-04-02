@@ -12,11 +12,15 @@ export default class TruckController {
         this._terrain.activeLoadingHall.addTruck(new Truck(2, 3, 2, TruckType.COLD));
         this._terrain.activeLoadingHall.addTruck(new Truck(6, 3, 3, TruckType.GENERAL));
         this._terrain.loadingHalls[1].addTruck(new Truck(2, 3, 2, TruckType.FRAGILE));
-        this._terrain.loadingHalls[1].addTruck(new Truck(6, 3, 3, TruckType.PALLET));
+        this._terrain.loadingHalls[1].addTruck(new Truck(5, 3, 3, TruckType.PALLET));
 
         this.render();
 
         EventEmitter.on('conveyorBeltUpdated', e => {
+            this.render();
+        });
+
+        EventEmitter.on('weatherUpdated', e => {
             this.render();
         });
     }

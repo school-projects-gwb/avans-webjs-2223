@@ -1,3 +1,5 @@
+import {EventEmitter} from "../modules.js";
+
 export default class WeatherHelper {
     constructor() {
         this.apiKey = 'c06c817ec00a4123b54145914232803';

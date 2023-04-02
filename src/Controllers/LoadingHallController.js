@@ -81,6 +81,8 @@ export default class LoadingHallController {
                 });
                 this._locationInputView.setWeatherData(this._weatherHelper.weatherData);
             });
+
+            EventEmitter.emit('weatherUpdated', {});
         });
     }
 }

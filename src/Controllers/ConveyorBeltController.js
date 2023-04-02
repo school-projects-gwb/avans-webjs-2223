@@ -72,7 +72,7 @@ export default class ConveyorBeltController {
         if (addConveyorBelt === '1' && conveyorBeltAmount < 3) {
           this._terrain.activeLoadingHall.conveyorBelts.push(this.createConveyorBelt());
         } else if (addConveyorBelt === '0' && conveyorBeltAmount > 1) {
-          this._terrain.activeLoadingHall.conveyorBelts.pop();
+            if (!this._terrain.activeLoadingHall.isMinimumTruckLimit()) this._terrain.activeLoadingHall.conveyorBelts.pop();
         }
 
         this.setConveyorBelts();
