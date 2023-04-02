@@ -59,7 +59,7 @@ export default class TruckOverviewView {
         }
 
         if (DOM.getById(this._targetElementId).children.length > 1) {
-            DOM.getById(this._targetElementId).insertBefore(wrapperElement, DOM.getById(this._targetElementId).lastChild);
+            DOM.getById(this._targetElementId).insertBefore(wrapperElement, DOM.getById(this._targetElementId).children[2]);
         } else {
             DOM.getById(this._targetElementId).appendChild(wrapperElement);
         }

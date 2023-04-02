@@ -35,6 +35,6 @@ export default class AddOrRemovveConveyorBeltView {
         wrapperElement.appendChild(buttonWrapper);
 
         const targetElement = DOM.getById(this._targetElementId);
-        targetElement.insertBefore(wrapperElement, targetElement.children[1]);
+        targetElement.insertBefore(wrapperElement, targetElement.children[2]);
     }
 }

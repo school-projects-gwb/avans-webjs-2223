@@ -36,7 +36,7 @@ export default class TruckCreatorView {
             this._wrapperElement.appendChild(warning);
         }
 
-        DOM.getById(this._targetElementId).insertBefore(this._wrapperElement, DOM.getById(this._targetElementId).lastChild);
+        DOM.getById(this._targetElementId).insertBefore(this._wrapperElement, DOM.getById(this._targetElementId).children[3]);
 
         if (!this._maximumTruckLimit) this.renderStep(1);
     }
