@@ -1,4 +1,13 @@
-import { EventEmitter, ConveyorBelt, ConveyorBeltView, ObjectState, TruckView, PackageView, DOM } from '../modules.js';
+import {
+    EventEmitter,
+    ConveyorBelt,
+    ConveyorBeltView,
+    ObjectState,
+    TruckView,
+    PackageView,
+    DOM,
+    MissedPackageView
+} from '../modules.js';
 
 export default class ConveyorBeltController {
     /**
@@ -18,11 +27,21 @@ export default class ConveyorBeltController {
     setConveyorBelts() { 
         this._conveyorBelts = this._terrain.conveyorBelts;
         this._conveyorBeltView = new ConveyorBeltView(this._targetElementId, this._conveyorBelts);
+        this._missedPackageView = new MissedPackageView('section-left');
     };
 
     render() {
         DOM.getById(this._targetElementId).innerHTML = '';
         this._conveyorBeltView.render();
+
+        const allMissedPackages = this._conveyorBelts.reduce((acc, belt) => {
+            for (const [key, value] of Object.entries(belt.missedPackages)) {
+                acc[key] = (acc[key] || 0) + value;
+            }
+            return acc;
+        }, {});
+        this._missedPackageView.render(allMissedPackages);
+
         for (const conveyorBelt of this._conveyorBelts) {
             conveyorBelt.handlePackageLoading();
             const trucks = conveyorBelt.trucks;

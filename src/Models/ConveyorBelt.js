@@ -12,6 +12,7 @@ export default class ConveyorBelt {
         this._trucks = [];
         this._packageCount = 12;
         this._packages = [];
+        this._missedPackages = [];
         this._markedPackageIndexes = [];
         for (let i = 0; i < this._packageCount; i++) {
             this._packages.push(new Package(i, i+1, this._posY+1));
@@ -86,7 +87,16 @@ export default class ConveyorBelt {
         for (const truckWrapper of this._trucks) {
             const availableDock = this.getFirstAvailableDock(1);
             if (!availableDock) break;
-            if (truckWrapper.canCreate && truckWrapper.canDrive) truckWrapper.create(availableDock.posX);
+            if (truckWrapper.canCreate && truckWrapper.canDrive) {
+                truckWrapper.create(availableDock.posX);
+            } else {
+                if (!this._packages[availableDock.posX]) break;
+                if (!this._missedPackages[this._packages[availableDock.posX].shapeInfo.name]) {
+                    this._missedPackages[this._packages[availableDock.posX].shapeInfo.name] = 1;
+                } else {
+                    this._missedPackages[this._packages[availableDock.posX].shapeInfo.name]++;
+                }
+            }
         }
 
         // Truck logic
@@ -156,5 +166,9 @@ export default class ConveyorBelt {
         }
 
         return chosenDock;
+    }
+
+    get missedPackages() {
+        return this._missedPackages;
     }
 }

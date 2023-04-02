@@ -32,6 +32,7 @@ import PackageView from "./Views/PackageView.js";
 import DragAndDropToggleView from "./Views/DragAndDropToggleView.js";
 import AddOrRemovveConveyorBeltView from "./Views/AddOrRemoveConveyorBeltView.js";
 import LocationInputView from "./Views/LocationInputView.js";
+import MissedPackageView from "./Views/MissedPackageView.js";
 import DOM from "./Views/DOM.js";
 
 // View Components
@@ -75,6 +76,7 @@ export {
     PackageView,
     DragAndDropToggleView,
     LocationInputView,
+    MissedPackageView,
     DOM,
 
     // View Components
