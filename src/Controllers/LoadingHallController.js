@@ -79,6 +79,7 @@ export default class LoadingHallController {
                     truck.updateDriveStatus(this._weatherHelper.weatherData)
                 });
                 this._locationInputView.setWeatherData(this._weatherHelper.weatherData);
+                this._locationInputView.render();
             });
 
             EventEmitter.emit('weatherUpdated', {});

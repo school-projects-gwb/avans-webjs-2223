@@ -13,6 +13,7 @@ export default class LocationInputView {
     }
 
     setWeatherData(weatherData) {
+        this._weatherData = weatherData;
         if (DOM.getById(this._weatherDataElementId) == null) return;
         const el = DOM.getById(this._weatherDataElementId);
         const wrapperElement = DOM.getById(this._wrapperElementId);
@@ -40,6 +41,7 @@ export default class LocationInputView {
         wrapperElement.appendChild(new ButtonLink(true, "Toepassen", 1, this.handleLocationInput.bind(this)));
         DOM.getById(this._targetElementId).appendChild(wrapperElement);
         DOM.getById('city').value = this._lastCity;
+        if (this._weatherData) this.setWeatherData(this._weatherData);
     }
 
     handleLocationInput() {
