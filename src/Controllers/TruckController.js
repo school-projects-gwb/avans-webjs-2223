@@ -52,8 +52,8 @@ export default class TruckController {
         const truck = new Truck(
             truckForm.getProperty('width'), 
             truckForm.getProperty('height'), 
-            truckForm.getProperty('interval'), 
-            truckForm.getProperty('type')
+            truckForm.getProperty('interval'),
+            TruckType[truckForm.getProperty('type')]
             );
 
         this._terrain.activeLoadingHall.addTruck(truck);
