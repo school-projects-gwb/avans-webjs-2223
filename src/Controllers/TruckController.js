@@ -10,7 +10,7 @@ export default class TruckController {
         this._targetElementId = targetElementId;
 
         this._terrain.activeLoadingHall.addTruck(new Truck(2, 3, 2, TruckType.COLD));
-        this._terrain.activeLoadingHall.addTruck(new Truck(6, 3, 3, TruckType.GENERAL));
+        this._terrain.activeLoadingHall.addTruck(new Truck(6, 3, 3, TruckType.FAST));
         this._terrain.loadingHalls[1].addTruck(new Truck(2, 3, 2, TruckType.FRAGILE));
         this._terrain.loadingHalls[1].addTruck(new Truck(5, 3, 3, TruckType.PALLET));
 

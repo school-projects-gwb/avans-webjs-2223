@@ -86,11 +86,11 @@ export default class ConveyorBelt {
 
         for (const truckWrapper of this._trucks) {
             const availableDock = this.getFirstAvailableDock(1);
-            if (!availableDock) break;
+            if (!availableDock) continue;
             if (truckWrapper.canCreate && truckWrapper.canDrive) {
                 truckWrapper.create(availableDock.posX);
             } else {
-                if (!this._packages[availableDock.posX]) break;
+                if (!this._packages[availableDock.posX]) continue;
                 if (!this._missedPackages[this._packages[availableDock.posX].shapeInfo.name]) {
                     this._missedPackages[this._packages[availableDock.posX].shapeInfo.name] = 1;
                 } else {
